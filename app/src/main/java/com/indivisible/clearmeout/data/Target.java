@@ -21,11 +21,22 @@ public class Target
     ////    init
     ///////////////////////////////////////////////////////
 
-    public Target(long id, long fk_profile, String rootDirectory, boolean isRecursive,
+    public Target()
+    {
+        this(-1, "NO DIRECTORY", false, false);
+    }
+
+    public Target(long parentProfileId, String rootDirectory, boolean isRecursive,
+            boolean doDeleteDirectories)
+    {
+        this(-1, parentProfileId, rootDirectory, isRecursive, doDeleteDirectories);
+    }
+
+    public Target(long id, long parentProfileId, String rootDirectory, boolean isRecursive,
             boolean doDeleteDirectories)
     {
         this.id = id;
-        this.fk_profile = fk_profile;
+        this.fk_profile = parentProfileId;
         this.rootDirectory = rootDirectory;
         this.recursive = isRecursive;
         this.deleteDirectories = doDeleteDirectories;

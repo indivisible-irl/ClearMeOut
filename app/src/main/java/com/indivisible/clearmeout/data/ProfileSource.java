@@ -131,7 +131,17 @@ public class ProfileSource
         int rowsDeleted = db.delete(DbOpenHelper.TABLE_PROFILES,
                 DbOpenHelper.COLUMN_GENERIC_ID + " = " + id,
                 null);
-        return false;
+        switch (rowsDeleted)
+        {
+            case 1:
+                return true;
+            case 0:
+                Log.e(TAG, "Delete: Didn't delete, no id match: " + id);
+                return false;
+            default:
+                Log.e(TAG, "Delete: Too many rows affected: " + id);
+                return false;
+        }
     }
 
 
