@@ -5,6 +5,7 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.text.InputType;
 import com.indivisible.clearmeout.R;
+import com.indivisible.clearmeout.data.IntervalType;
 
 
 public class EveryXMinutesInterval

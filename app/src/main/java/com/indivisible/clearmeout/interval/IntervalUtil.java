@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import com.indivisible.clearmeout.R;
+import com.indivisible.clearmeout.data.IntervalType;
 
 
 public class IntervalUtil

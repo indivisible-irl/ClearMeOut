@@ -4,6 +4,7 @@ import android.content.Context;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import com.indivisible.clearmeout.R;
+import com.indivisible.clearmeout.data.IntervalType;
 import com.indivisible.clearmeout.preferences.TimePreference;
 
 

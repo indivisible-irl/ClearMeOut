@@ -1,4 +1,4 @@
-package com.indivisible.clearmeout.interval;
+package com.indivisible.clearmeout.data;
 
 
 public enum IntervalType

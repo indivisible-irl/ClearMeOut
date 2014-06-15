@@ -10,7 +10,7 @@ import com.indivisible.clearmeout.R;
 import com.indivisible.clearmeout.fragment.IntervalChildPreferencesFragment;
 import com.indivisible.clearmeout.fragment.IntervalParentPreferencesFragment;
 import com.indivisible.clearmeout.fragment.IntervalParentPreferencesFragment.ParentIntervalPreferenceInterface;
-import com.indivisible.clearmeout.interval.IntervalType;
+import com.indivisible.clearmeout.data.IntervalType;
 import com.indivisible.clearmeout.interval.IntervalUtil;
 
 

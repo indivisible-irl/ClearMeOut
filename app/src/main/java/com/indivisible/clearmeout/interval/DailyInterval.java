@@ -3,6 +3,7 @@ package com.indivisible.clearmeout.interval;
 import android.content.Context;
 import android.preference.Preference;
 import com.indivisible.clearmeout.R;
+import com.indivisible.clearmeout.data.IntervalType;
 import com.indivisible.clearmeout.preferences.TimePreference;
 
 

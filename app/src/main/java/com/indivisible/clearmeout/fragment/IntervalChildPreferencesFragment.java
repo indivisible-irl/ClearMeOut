@@ -13,7 +13,7 @@ import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 import com.indivisible.clearmeout.R;
-import com.indivisible.clearmeout.interval.IntervalType;
+import com.indivisible.clearmeout.data.IntervalType;
 import com.indivisible.clearmeout.preferences.TimePreference;
 
 
