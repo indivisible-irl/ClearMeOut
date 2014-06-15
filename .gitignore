@@ -23,11 +23,14 @@ Thumbs.db
 # Eclipse files
 .classpath
 .project
+.metadata
 
 # Studio/IDEA files
 import-summary.txt
-.idea
-.gradle
 build/
 app/build
-
+.gradle
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/datasources.xml
+.idea/dataSources.ids
