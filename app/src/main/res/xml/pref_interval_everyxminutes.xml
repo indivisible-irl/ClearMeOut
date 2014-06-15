@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceCategory 
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
         android:title="@string/pref_interval_category_child_title">
 
         <EditTextPreference
             android:key="@string/pref_interval_everyXMinutes_key"
             android:title="@string/pref_interval_everyXMinutes_title"
             android:summary="@string/pref_interval_everyXMinutes_text"
-            android:inputType="number" />
+            />
 
-        <!--
-        <com.indivisible.clearmeout.preferences.NumberPreference 
-            android:key="@string/pref_interval_everyXMinutes_key"
-            android:title="@string/pref_interval_everyXMinutes_title"
-            android:summary="@string/pref_interval_everyXMinutes_text"
-            /> -->
-        
     </PreferenceCategory>
 </PreferenceScreen>

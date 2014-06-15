@@ -1,5 +1,12 @@
 package com.indivisible.clearmeout.fragment;
 
+import static com.indivisible.clearmeout.R.xml.pref_interval_daily;
+import static com.indivisible.clearmeout.R.xml.pref_interval_everyxdays;
+import static com.indivisible.clearmeout.R.xml.pref_interval_everyxhours;
+import static com.indivisible.clearmeout.R.xml.pref_interval_everyxminutes;
+import static com.indivisible.clearmeout.R.xml.pref_interval_onthesedates;
+import static com.indivisible.clearmeout.R.xml.pref_interval_ontheseweekdays;
+import static com.indivisible.clearmeout.R.xml.pref_interval_weekly;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -7,7 +14,6 @@ import android.preference.PreferenceFragment;
 import android.util.Log;
 import com.indivisible.clearmeout.R;
 import com.indivisible.clearmeout.interval.IntervalType;
-import com.indivisible.clearmeout.preferences.NumberPreference;
 import com.indivisible.clearmeout.preferences.TimePreference;
 
 
@@ -19,32 +25,34 @@ public class IntervalChildPreferencesFragment
     ////    data
     ///////////////////////////////////////////////////////
 
-    private NumberPreference everyXMinutesPreference;
-    private EditTextPreference everyXHoursPreference;
-    private EditTextPreference everyXDaysDaysPreference;
-    private TimePreference everyXDaysTimePreference;
-    private TimePreference dailyTimePreference;
-    private EditTextPreference weeklyDayPreference;
-    private TimePreference weeklyTimePreference;
-    private EditTextPreference onTheseWeekdaysDaysPreference;
-    private TimePreference onTheseWeekdaysTimePreference;
-    private EditTextPreference onTheseDatesDatesPreference;
-    private TimePreference onTheseDatesTimePreference;
+    private IntervalType intervalType = null;
 
-    private String everyXMinutesKey;
-    private String everyXHoursKey;
-    private String everyXDaysDaysKey;
-    private String everyXDaysTimeKey;
-    private String dailyTimeKey;
-    private String weeklyDayKey;
-    private String weeklyTimeKey;
-    private String onTheseWeekdaysDaysKey;
-    private String onTheseWeekdaysTimeKey;
-    private String onTheseDatesDatesKey;
-    private String onTheseDatesTimeKey;
+    private EditTextPreference everyXMinutesPreference = null;
+    private EditTextPreference everyXHoursPreference = null;
+    private EditTextPreference everyXDaysDaysPreference = null;
+    private TimePreference everyXDaysTimePreference = null;
+    private TimePreference dailyTimePreference = null;
+    private EditTextPreference weeklyDayPreference = null;
+    private TimePreference weeklyTimePreference = null;
+    private EditTextPreference onTheseWeekdaysDaysPreference = null;
+    private TimePreference onTheseWeekdaysTimePreference = null;
+    private EditTextPreference onTheseDatesDatesPreference = null;
+    private TimePreference onTheseDatesTimePreference = null;
+
+    private String everyXMinutesKey = null;
+    private String everyXHoursKey = null;
+    private String everyXDaysDaysKey = null;
+    private String everyXDaysTimeKey = null;
+    private String dailyTimeKey = null;
+    private String weeklyDayKey = null;
+    private String weeklyTimeKey = null;
+    private String onTheseWeekdaysDaysKey = null;
+    private String onTheseWeekdaysTimeKey = null;
+    private String onTheseDatesDatesKey = null;
+    private String onTheseDatesTimeKey = null;
 
     private static final String KEY_INTERVAL_EXTRA = "IntervalExtra";
-    private static final String TAG = "IntervalChildPrefFrag";
+    private static final String TAG = "IntChildPrefFrag";
 
 
     ///////////////////////////////////////////////////////
@@ -66,117 +74,98 @@ public class IntervalChildPreferencesFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        intervalType = (IntervalType) getArguments().getSerializable(KEY_INTERVAL_EXTRA);
         initStrings();
-        initPreferences();
+        loadPreferences();
     }
 
     private void initStrings()
     {
         Context cxt = getActivity();
-        everyXMinutesKey = cxt.getString(R.string.pref_interval_everyXMinutes_key);
-        everyXHoursKey = cxt.getString(R.string.pref_interval_everyXHours_key);
-        everyXDaysDaysKey = cxt.getString(R.string.pref_interval_everyXDays_days_key);
-        everyXDaysTimeKey = cxt.getString(R.string.pref_interval_everyXDays_time_key);
-        dailyTimeKey = cxt.getString(R.string.pref_interval_daily_key);
-        weeklyDayKey = cxt.getString(R.string.pref_interval_weekly_day_key);
-        weeklyTimeKey = cxt.getString(R.string.pref_interval_weekly_time_key);
-        onTheseWeekdaysDaysKey = cxt
-                .getString(R.string.pref_interval_onTheseWeekdays_days_key);
-        onTheseWeekdaysTimeKey = cxt
-                .getString(R.string.pref_interval_onTheseWeekdays_time_key);
-        onTheseDatesDatesKey = cxt.getString(R.string.pref_interval_onTheseDates_dates_key);
-        onTheseDatesTimeKey = cxt.getString(R.string.pref_interval_onTheseDates_time_key);
-    }
-
-    private void initPreferences()
-    {
-        IntervalType intervalType = (IntervalType) getArguments()
-                .getSerializable(KEY_INTERVAL_EXTRA);
-        Log.d(TAG, "initPrefs: intervalType: " + intervalType.name());
-        loadPreferences(intervalType);
-    }
-
-    public void loadPreferences(IntervalType intervalType)
-    {
-        Log.d(TAG, "loadPrefs: intervalType: " + intervalType.name());
-        try
-        {
-            this.getPreferenceScreen().removeAll();
-        }
-        catch (NullPointerException e)
-        {}
         switch (intervalType)
         {
             case EveryXMinutes:
-                addPreferencesFromResource(R.xml.pref_interval_everyxminutes);
-                if (everyXMinutesPreference == null)
-                {
-                    everyXMinutesPreference = (NumberPreference) findPreference(everyXMinutesKey);
-                }
+                everyXMinutesKey = cxt.getString(R.string.pref_interval_everyXMinutes_key);
                 break;
             case EveryXHours:
-                addPreferencesFromResource(R.xml.pref_interval_everyxhours);
-                if (everyXHoursPreference == null)
-                {
-                    everyXHoursPreference = (EditTextPreference) findPreference(everyXHoursKey);
-                }
+                everyXHoursKey = cxt.getString(R.string.pref_interval_everyXHours_key);
                 break;
             case EveryXDays:
-                addPreferencesFromResource(R.xml.pref_interval_everyxdays);
-                if (everyXDaysDaysPreference == null)
-                {
-                    everyXDaysDaysPreference = (EditTextPreference) findPreference(everyXDaysDaysKey);
-                }
-                if (everyXDaysTimePreference == null)
-                {
-                    everyXDaysTimePreference = (TimePreference) findPreference(everyXDaysTimeKey);
-                }
+                everyXDaysDaysKey = cxt.getString(R.string.pref_interval_everyXDays_days_key);
+                everyXDaysTimeKey = cxt.getString(R.string.pref_interval_everyXDays_time_key);
                 break;
             case Daily:
-                addPreferencesFromResource(R.xml.pref_interval_daily);
-                if (dailyTimePreference == null)
-                {
-                    dailyTimePreference = (TimePreference) findPreference(dailyTimeKey);
-                }
+                dailyTimeKey = cxt.getString(R.string.pref_interval_daily_key);
                 break;
             case Weekly:
-                addPreferencesFromResource(R.xml.pref_interval_weekly);
-                if (weeklyDayPreference == null)
-                {
-                    weeklyDayPreference = (EditTextPreference) findPreference(weeklyDayKey);
-                }
-                if (weeklyTimePreference == null)
-                {
-                    weeklyTimePreference = (TimePreference) findPreference(weeklyTimeKey);
-                }
+                weeklyDayKey = cxt.getString(R.string.pref_interval_weekly_day_key);
+                weeklyTimeKey = cxt.getString(R.string.pref_interval_weekly_time_key);
                 break;
             case OnTheseWeekdays:
-                addPreferencesFromResource(R.xml.pref_interval_ontheseweekdays);
-                if (onTheseWeekdaysDaysPreference == null)
-                {
-                    onTheseWeekdaysDaysPreference = (EditTextPreference) findPreference(onTheseWeekdaysDaysKey);
-                }
-                if (onTheseWeekdaysTimePreference == null)
-                {
-                    onTheseWeekdaysTimePreference = (TimePreference) findPreference(onTheseWeekdaysTimeKey);
-                }
+                onTheseWeekdaysDaysKey = cxt
+                        .getString(R.string.pref_interval_onTheseWeekdays_days_key);
+                onTheseWeekdaysTimeKey = cxt
+                        .getString(R.string.pref_interval_onTheseWeekdays_time_key);
                 break;
             case OnTheseDates:
-                addPreferencesFromResource(R.xml.pref_interval_onthesedates);
-                if (onTheseDatesDatesPreference == null)
-                {
-                    onTheseDatesDatesPreference = (EditTextPreference) findPreference(onTheseDatesDatesKey);
-                }
-                if (onTheseDatesTimePreference == null)
-                {
-                    onTheseDatesTimePreference = (TimePreference) findPreference(onTheseDatesTimeKey);
-                }
+                onTheseDatesDatesKey = cxt
+                        .getString(R.string.pref_interval_onTheseDates_dates_key);
+                onTheseDatesTimeKey = cxt
+                        .getString(R.string.pref_interval_onTheseDates_time_key);
+                break;
+            case INVALID:
+                Log.e(TAG, "initStrings: INVALID IntervalType");
+                break;
+            default:
+                Log.e(TAG, "initStrings: Unhandled IntervalType: " + intervalType.name());
+                break;
+        }
+    }
+
+    public void loadPreferences()
+    {
+        Log.d(TAG, "loadPrefs: intervalType: " + intervalType.name());
+        switch (intervalType)
+        {
+            case EveryXMinutes:
+                addPreferencesFromResource(pref_interval_everyxminutes);
+                everyXMinutesPreference = (EditTextPreference) findPreference(everyXMinutesKey);
+                break;
+            case EveryXHours:
+                addPreferencesFromResource(pref_interval_everyxhours);
+                everyXHoursPreference = (EditTextPreference) findPreference(everyXHoursKey);
+                break;
+            case EveryXDays:
+                addPreferencesFromResource(pref_interval_everyxdays);
+                everyXDaysDaysPreference = (EditTextPreference) findPreference(everyXDaysDaysKey);
+                everyXDaysTimePreference = (TimePreference) findPreference(everyXDaysTimeKey);
+                break;
+            case Daily:
+                addPreferencesFromResource(pref_interval_daily);
+                dailyTimePreference = (TimePreference) findPreference(dailyTimeKey);
+                break;
+            case Weekly:
+                addPreferencesFromResource(pref_interval_weekly);
+                weeklyDayPreference = (EditTextPreference) findPreference(weeklyDayKey);
+                weeklyTimePreference = (TimePreference) findPreference(weeklyTimeKey);
+                break;
+            case OnTheseWeekdays:
+                addPreferencesFromResource(pref_interval_ontheseweekdays);
+                onTheseWeekdaysDaysPreference = (EditTextPreference) findPreference(onTheseWeekdaysDaysKey);
+                onTheseWeekdaysTimePreference = (TimePreference) findPreference(onTheseWeekdaysTimeKey);
+
+                break;
+            case OnTheseDates:
+                addPreferencesFromResource(pref_interval_onthesedates);
+                onTheseDatesDatesPreference = (EditTextPreference) findPreference(onTheseDatesDatesKey);
+                onTheseDatesTimePreference = (TimePreference) findPreference(onTheseDatesTimeKey);
+                break;
+            case INVALID:
+                Log.e(TAG, "loadPrefs: INVALID IntervalType");
                 break;
             default:
                 Log.e(TAG, "loadPrefs: Unhandled IntervalType: " + intervalType.name());
                 break;
         }
     }
-
-
 }

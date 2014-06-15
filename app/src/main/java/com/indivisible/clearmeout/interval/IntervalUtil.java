@@ -1,6 +1,8 @@
 package com.indivisible.clearmeout.interval;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import com.indivisible.clearmeout.R;
 
@@ -8,10 +10,13 @@ import com.indivisible.clearmeout.R;
 public class IntervalUtil
 {
 
+    private static final IntervalType DEFAULT_TYPE = IntervalType.EveryXHours;
     private static final String TAG = "IntervalUtil";
 
-    public static IntervalType calcIntervalType(Context context, String intervalString)
+    public static IntervalType calcIntervalType(Context context, CharSequence interval)
     {
+        String intervalString = interval.toString();
+        Log.d(TAG, "IntervalString: " + intervalString);
         if (intervalString.equals(context.getString(R.string.pref_interval_everyXMinutes_key)))
         {
             return IntervalType.EveryXMinutes;
@@ -49,6 +54,22 @@ public class IntervalUtil
         {
             Log.e(TAG, "calcType: Invalid/Unhandled String: " + intervalString);
             return IntervalType.INVALID;
+        }
+    }
+
+    public static IntervalType getCurentIntervalType(Context context)
+    {
+        SharedPreferences pm = PreferenceManager.getDefaultSharedPreferences(context);
+        String intervalString = pm.getString(context
+                .getString(R.string.pref_interval_choice_key), null);
+        if (intervalString != null)
+        {
+            return calcIntervalType(context, intervalString);
+        }
+        else
+        {
+            Log.w(TAG, "No IntervalChoice saved, using default: " + DEFAULT_TYPE.name());
+            return DEFAULT_TYPE;
         }
     }
 }

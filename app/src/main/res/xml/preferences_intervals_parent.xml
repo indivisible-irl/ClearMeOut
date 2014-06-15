@@ -8,7 +8,6 @@
             android:title="@string/pref_interval_choice_title"
             android:entries="@array/pref_interval_choices_titles"
             android:entryValues="@array/pref_interval_choices_keys"
-            android:defaultValue="@string/pref_interval_daily_key"
             />
         <CheckBoxPreference 
             android:key="@string/pref_interval_isStrictAlarm_key"

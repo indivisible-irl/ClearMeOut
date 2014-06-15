@@ -2,14 +2,12 @@ package com.indivisible.clearmeout.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import com.indivisible.clearmeout.R;
 import com.indivisible.clearmeout.interval.IntervalType;
@@ -33,7 +31,7 @@ public class IntervalParentPreferencesFragment
 
     private ParentIntervalPreferenceInterface parentInterface;
 
-    private static final String TAG = "IntervalPrefFrag";
+    private static final String TAG = "IntParentPrefFrag";
 
 
     ///////////////////////////////////////////////////////
@@ -64,10 +62,11 @@ public class IntervalParentPreferencesFragment
     private void initPreferences()
     {
         intervalChoicesPreference = (ListPreference) findPreference(intervalChoicesKey);
+        intervalChoicesPreference.setPersistent(true);
         intervalChoicesPreference.setOnPreferenceChangeListener(this);
-        if(intervalChoicesPreference.getValue() == null)
+        if (intervalChoicesPreference.getValue() == null)
         {
-            intervalChoicesPreference.setValueIndex(0);
+            intervalChoicesPreference.setValueIndex(1);
         }
         isStrictAlarmPreference = (CheckBoxPreference) findPreference(isStrictAlarmKey);
     }
@@ -82,7 +81,7 @@ public class IntervalParentPreferencesFragment
         }
         catch (ClassCastException e)
         {
-            Log.e(TAG, "Parent Activity deosn't implement 'ParentIntervalPreferenceInterface'");
+            Log.e(TAG, "Parent Activity doesn't implement 'ParentIntervalPreferenceInterface'");
             throw new ClassCastException(activity.toString()
                     + " must implement ParentIntervalPreferenceInterface");
         }
@@ -107,34 +106,18 @@ public class IntervalParentPreferencesFragment
     ////    prefs
     ///////////////////////////////////////////////////////
 
-    public IntervalType getIntervalType(Context context)
-    {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String intervalTypeString = prefs.getString(intervalChoicesKey,
-                context.getString(R.string.pref_interval_choice_default));
-        return IntervalUtil.calcIntervalType(context, intervalTypeString);
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue)
     {
+        Log.v(TAG, "prefChange: " + newValue.toString());
         if (preference.getKey().equals(intervalChoicesKey))
         {
-            try
-            {
-                String newIntervalChoice = (String) newValue;
-                IntervalType intervalType = IntervalUtil.calcIntervalType(getActivity(),
-                        newIntervalChoice);
-                parentInterface.onIntervalChoiceChanged(intervalType);
-                return true;
-            }
-            catch (ClassCastException e)
-            {
-                Log.e(TAG,
-                        "Failed to cast new intervalChoice to String: " + newValue.toString());
-            }
+            preference.shouldCommit();
+            IntervalType intervalType = IntervalUtil.calcIntervalType(getActivity(),
+                    newValue.toString());
+            parentInterface.onIntervalChoiceChanged(intervalType);
+            return true;
         }
         return false;
     }
-
 }
