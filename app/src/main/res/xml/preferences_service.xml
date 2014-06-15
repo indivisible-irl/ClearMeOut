@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/pref_category_interval">
+    
+        <CheckBoxPreference 
+            android:key="@string/pref_service_isActive_key"
+            android:title="@string/pref_service_isActive_title"
+            android:summaryOn="@string/pref_service_isActive_summaryOn"
+            android:summaryOff="@string/pref_service_isActive_summaryOff"
+            android:defaultValue="false"
+            android:disableDependentsState="false"
+            />
+        <CheckBoxPreference 
+            android:key="@string/pref_service_notifyOnDelete_key"
+            android:title="@string/pref_service_notifyOnDelete_title"
+            android:summaryOn="@string/pref_service_notifyOnDelete_summaryOn"
+            android:summaryOff="@string/pref_service_notifyOnDelete_summaryOff"
+            android:defaultValue="true"
+            android:dependency="@string/pref_service_isActive_key"
+            />
+        <Preference
+            android:key="@string/pref_service_intent_intervals_key"
+            android:title="@string/pref_service_intent_intervals_title"
+            android:summary="@string/pref_service_intent_intervals_text"
+            />
+        
+    </PreferenceCategory>
+</PreferenceScreen>

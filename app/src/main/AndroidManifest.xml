@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE xml>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.indivisible.clearmeout"
+    android:installLocation="internalOnly"
+    android:versionCode="3"
+    android:versionName="0.3" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        
+        <!--  Broadcast Receivers  -->
+        <receiver
+            android:name="com.indivisible.clearmeout.receiver.OnBootReceiver">  
+    		<intent-filter>  
+        		<action android:name="android.intent.action.BOOT_COMPLETED" />  
+    		</intent-filter>  
+		</receiver>
+        
+        
+        <!--  Services  -->
+        <service 
+            android:name="com.indivisible.clearmeout.service.DeleteService"
+            android:exported="false">
+        </service>
+        <service
+            android:name="com.indivisible.clearmeout.service.UpdateAlarmsService"
+            android:exported="false" >
+        </service>
+        
+        
+        <!--  Activities  -->
+        <activity
+            android:name="com.indivisible.clearmeout.activity.RootPreferencesActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.indivisible.clearmeout.activity.StartActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.indivisible.clearmeout.activity.MainPrefsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.indivisible.clearmeout.activity.FiltersPreferenceActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.indivisible.clearmeout.activity.IntervalsPreferenceActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.mburman.fileexplore.FileExplore"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.vassiliev.androidfilebrowser.FileBrowserActivity"
+            android:label="@string/app_name"
+            android:theme="@style/LightTheme" >
+        </activity>
+        
+    </application>
+
+</manifest>

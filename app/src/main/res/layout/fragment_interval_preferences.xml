@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <fragment 
+        android:id="@+id/frag_intervals_parent"
+        class="com.indivisible.clearmeout.fragment.IntervalParentPreferencesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <FrameLayout 
+        android:id="@+id/frag_intervals_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+
+    
+</LinearLayout>

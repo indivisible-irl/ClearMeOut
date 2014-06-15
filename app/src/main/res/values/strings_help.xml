@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!--  Quick help text for temp use before implementing a real help screen  -->
+    <string name="help_title">ClearMeOut Help</string>
+    <string name="help_text">
+        This app is still in the dev stages so here\'s a few tips to get you started:
+        \n\nUsing a \'Recursive delete\' will delete a folder\'s contents AND ALL sub-folders\'s files too.\nUncheck this option to only delete files directly within the target folder.
+        \nOptional deletion or not the sub-folders themselves with \'Delete Folders\'.
+        \n\nUsing a \'Strict interval\' means that the folder will be cleared exactly when you set it for.\nThis possible advantage has the disadvantage of using up some small amount of extra battery in some situations.\nIf this is an issue for you disable this option.
+        \n\nIf you ONLY want to manualy clear a folder:\n- set the target folder\n- hit the \'ClearMeOut Now\' button when desired\n\nAs long as a folder is set the \'ClearMeOut Now\' button will work and respect all deletion settings. 
+    </string>
+    
+</resources>

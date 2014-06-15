@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- pref.interval(s) -->
+    <string name="pref_category_interval">Automatic Delete Interval</string>
+
+        <!-- service_active (Checkbox) -->
+        <string name="pref_service_isActive_key">pref_service_isActive</string>
+        <string name="pref_service_isActive_title">Toggle ClearMeOut service</string>
+        <string name="pref_service_isActive_summaryOn">Service is running</string>
+        <string name="pref_service_isActive_summaryOff">Service is currently off</string>
+        
+        <!-- notify_on_delete (Checkbox) -->
+        <string name="pref_service_notifyOnDelete_key">pref_service_notifyOnDelete</string>
+        <string name="pref_service_notifyOnDelete_title">Notify on delete?</string>
+        <string name="pref_service_notifyOnDelete_summaryOn">Will show notification on delete</string>
+        <string name="pref_service_notifyOnDelete_summaryOff">Will delete silently</string>
+        
+        <!-- pref_intervals_intent (Preference - Opens new Activity) -->
+        <string name="pref_service_intent_intervals_key">pref_screen_intervals</string>
+        <string name="pref_service_intent_intervals_title">Configure Intervals&#8230;</string>
+        <string name="pref_service_intent_intervals_text">[default interval text]</string>
+
+</resources>

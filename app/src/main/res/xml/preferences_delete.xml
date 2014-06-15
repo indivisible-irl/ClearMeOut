@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/pref_category_delete" >
+        
+        <EditTextPreference 
+            android:key="@string/pref_delete_targetFolder_key"
+            android:title="@string/pref_delete_targetFolder_title"
+            android:summary="@string/pref_delete_targetFolder_text"
+            android:defaultValue="@string/pref_delete_targetFolder_default"
+            android:disableDependentsState="@string/pref_delete_targetFolder_default"
+            />
+        <CheckBoxPreference 
+            android:key="@string/pref_delete_doRecursiveDelete_key"
+            android:title="@string/pref_delete_doRecursiveDelete_title"
+            android:summaryOn="@string/pref_delete_doRecursiveDelete_summaryOn"
+            android:summaryOff="@string/pref_delete_doRecursiveDelete_summaryOff"
+            android:defaultValue="false"
+            android:disableDependentsState="false"
+            android:dependency="@string/pref_delete_targetFolder_key"
+            />
+        <CheckBoxPreference 
+            android:key="@string/pref_delete_doDeleteFolders_key"
+            android:title="@string/pref_delete_doDeleteFolders_title"
+            android:summaryOn="@string/pref_delete_doDeleteFolders_summaryOn"
+            android:summaryOff="@string/pref_delete_doDeleteFolders_summaryOff"
+            android:defaultValue="false"
+            android:dependency="@string/pref_delete_doRecursiveDelete_key"
+            />
+        <Preference
+            android:key="@string/pref_delete_intent_filters_key"
+            android:title="@string/pref_delete_intent_filters_title"
+            android:summary="@string/pref_delete_intent_filters_text"
+            />
+        
+    </PreferenceCategory>
+</PreferenceScreen>

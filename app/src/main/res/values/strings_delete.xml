@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- pref.delete -->
+    <string name="pref_category_delete">Delete settings</string>
+
+        <!-- delete_targetFolder (EditText with custom onClick) -->
+        <string name="pref_delete_targetFolder_key">pref_service_targetFolder</string>
+        <string name="pref_delete_targetFolder_title">Select folder to clear</string>
+        <string name="pref_delete_targetFolder_text">[Folder path]</string>
+        <string name="pref_delete_targetFolder_default">[set folder to start]</string>
+
+        <!-- delete_doRecursiveDelete (Checkbox) -->
+        <string name="pref_delete_doRecursiveDelete_key">pref_delete_doRecursiveDelete</string>
+        <string name="pref_delete_doRecursiveDelete_title">Recursively delete?</string>
+        <string name="pref_delete_doRecursiveDelete_summaryOn">Apply settings to all sub-folders too</string>
+        <string name="pref_delete_doRecursiveDelete_summaryOff">Leave sub-folders untouched</string>
+
+        <!-- delete_doDeleteFolders (Checkbox) -->
+        <string name="pref_delete_doDeleteFolders_key">pref_delete_doDeleteFolders</string>
+        <string name="pref_delete_doDeleteFolders_title">Delete folders?</string>
+        <string name="pref_delete_doDeleteFolders_summaryOn">Will delete folders too</string>
+        <string name="pref_delete_doDeleteFolders_summaryOff">Will not delete folders</string>
+        
+        <!-- delete_intent_filters -->
+        <string name="pref_delete_intent_filters_key">pref_delete_intent_filters</string>
+        <string name="pref_delete_intent_filters_title">Filters</string>
+        <string name="pref_delete_intent_filters_text">Click to set Filters</string>
+    
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:title="@string/pref_interval_category_parent_title">
+        
+        <ListPreference 
+            android:key="@string/pref_interval_choice_key"
+            android:title="@string/pref_interval_choice_title"
+            android:entries="@array/pref_interval_choices_titles"
+            android:entryValues="@array/pref_interval_choices_keys"
+            android:defaultValue="@string/pref_interval_daily_key"
+            />
+        <CheckBoxPreference 
+            android:key="@string/pref_interval_isStrictAlarm_key"
+            android:title="@string/pref_interval_isStrictAlarm_title"
+            android:summaryOn="@string/pref_interval_isStrictAlarm_summaryOn"
+            android:summaryOff="@string/pref_interval_isStrictAlarm_summaryOff"
+            />
+        
+    </PreferenceCategory>
+</PreferenceScreen>

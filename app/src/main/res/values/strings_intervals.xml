@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- interval preference categories -->
+    
+        <string name="pref_interval_category_parent_key">pref_interval_category_parent</string>
+        <string name="pref_interval_category_parent_title">Interval Settings</string>
+        <string name="pref_interval_category_child_key">pref_interval_category_child</string>
+        <string name="pref_interval_category_child_title">Interval Configuration</string>
+    
+    <!-- interval options -->
+    
+        <!-- pref_interval_everyXMinutes -->
+        <string name="pref_interval_everyXMinutes_key">pref_interval_everyXMinutes</string>
+        <string name="pref_interval_everyXMinutes_title">Every X Minutes</string>
+        <string name="pref_interval_everyXMinutes_text">Clear every %1$s minutes</string>
+    
+        <!-- pref_interval_everyXHours -->
+        <string name="pref_interval_everyXHours_key">pref_interval_everyXHours_key</string>
+        <string name="pref_interval_everyXHours_title">Every X Hours</string>
+        <string name="pref_interval_everyXHours_text">Clear every %1$s hours</string>
+    
+        <!-- pref_interval_everyXDays -->
+        <string name="pref_interval_everyXDays_days_key">pref_interval_everyXDays_days</string>
+        <string name="pref_interval_everyXDays_days_title">Every X days</string>
+        <string name="pref_interval_everyXDays_days_text">Clear every %1$s days</string>
+        <string name="pref_interval_everyXDays_time_key">pref_interval_everyXDays_time</string>
+        <string name="pref_interval_everyXDays_time_title">Time of day to Clear</string>
+        <string name="pref_interval_everyXDays_time_text">Clear at %1$s</string>
+           
+        <!-- pref_interval_daily -->
+        <string name="pref_interval_daily_key">pref_interval_daily</string>
+        <string name="pref_interval_daily_title">Clear once a day</string>
+        <string name="pref_interval_daily_text">Clear at %1$s every day</string>
+        <string name="pref_interval_daily_default">00:00</string>
+    
+        <!-- pref_interval_weekly -->
+        <string name="pref_interval_weekly_day_key">pref_interval_weekly_day</string>
+        <string name="pref_interval_weekly_day_title">Once a week</string>
+        <string name="pref_interval_weekly_day_text">Clear every %1$s</string>
+        <string name="pref_interval_weekly_time_key">pref_interval_weekly_time</string>
+        <string name="pref_interval_weekly_time_title">Time of day to Clear</string>
+        <string name="pref_interval_weekly_time_text">Clear at %1$s</string>
+        
+    
+        <!-- pref_interval_onTheseDays -->
+        <string name="pref_interval_onTheseWeekdays_days_key">pref_interval_onTheseDays</string>
+        <string name="pref_interval_onTheseWeekdays_days_title">Clear on particular days</string>
+        <string name="pref_interval_onTheseWeekdays_days_text">Clear on %1$s</string>
+        <string name="pref_interval_onTheseWeekdays_days_default">1001000</string>
+        <string name="pref_interval_onTheseWeekdays_time_key">pref_interval_onTheseDays_time</string>
+        <string name="pref_interval_onTheseWeekdays_time_title">Time of day to Clear</string>
+        <string name="pref_interval_onTheseWeekdays_time_text">Clear at %1$s</string>
+    
+        <!-- pref_interval_onTheseDates -->
+        <string name="pref_interval_onTheseDates_dates_key">pref_interval_onTheseDates</string>
+        <string name="pref_interval_onTheseDates_dates_title">Clear on particular dates</string>
+        <string name="pref_interval_onTheseDates_dates_text">Clear on %1$s</string>
+        <string name="pref_interval_onTheseDates_dates_default">1000000000000010000000000000000</string>
+        <string name="pref_interval_onTheseDates_time_key">pref_interval_onTheseDates_time</string>
+        <string name="pref_interval_onTheseDates_time_title">Time of day to Clear</string>
+        <string name="pref_interval_onTheseDates_time_text">Clear at %1$s</string>
+
+    
+    <!-- preference items -->
+    
+        <!-- pref.interval.choice -->
+        <string name="pref_interval_choice_key">pref_interval_choice</string>
+        <string name="pref_interval_choice_title">Select interval type</string>
+        <string name="pref_interval_choice_default">@string/pref_interval_everyXHours_key</string>
+
+        <!-- intervals choice arrays -->
+        <string-array name="pref_interval_choices_titles">
+            <item>@string/pref_interval_everyXMinutes_title</item>
+            <item>@string/pref_interval_everyXHours_title</item>
+            <item>@string/pref_interval_everyXDays_days_title</item>
+            <item>@string/pref_interval_daily_title</item>
+            <item>@string/pref_interval_weekly_day_title</item>
+            <item>@string/pref_interval_onTheseWeekdays_days_title</item>
+            <item>@string/pref_interval_onTheseDates_dates_title</item>
+        </string-array>
+        <string-array name="pref_interval_choices_keys">
+            <item>@string/pref_interval_everyXMinutes_key</item>
+            <item>@string/pref_interval_everyXHours_key</item>
+            <item>@string/pref_interval_everyXDays_days_key</item>
+            <item>@string/pref_interval_daily_key</item>
+            <item>@string/pref_interval_weekly_day_key</item>
+            <item>@string/pref_interval_onTheseWeekdays_days_key</item>
+            <item>@string/pref_interval_onTheseDates_dates_key</item>
+        </string-array>
+
+        <!-- pref.inteval.isStrictAlarm (Checkbox) -->
+        <string name="pref_interval_isStrictAlarm_key">pref_interval_isStrictAlarm</string>
+        <string name="pref_interval_isStrictAlarm_title">Use strict alarm interval</string>
+        <string name="pref_interval_isStrictAlarm_summaryOn">Clear folder exactly on interval \n(slightly less battery friendly)</string>
+        <string name="pref_interval_isStrictAlarm_summaryOff">Clear folder loosely on interval \n(slightly more battery friendly)</string>
+    
+</resources>

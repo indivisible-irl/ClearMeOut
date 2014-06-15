@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  Application Strings -->
+    
+        <string name="app_name">ClearMeOut</string>
+        <string name="action_settings">Settings</string>
+        
+        <string name="alarm_id">20901</string>
+    
+        
+    <!--  StartActivity Strings -->
+    
+        <string name="start_btn_preferences">Preferences</string>
+        <string name="start_btn_delete">ClearMeOut Now</string>
+        <string name="start_btn_help">Help</string>
+        <string name="start_btn_refill">Refill target dir (for dev purposes)</string>
+        <string name="start_tv_target_folder">Current target folder:\n\t-  %s</string>
+    
+</resources>
