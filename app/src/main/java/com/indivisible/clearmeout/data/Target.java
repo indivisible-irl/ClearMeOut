@@ -10,8 +10,8 @@ public class Target
     ////    data
     ///////////////////////////////////////////////////////
 
-    private int id;
-    private int fk_profile;
+    private long id;
+    private long fk_profile;
     private String rootDirectory;
     private boolean recursive;
     private boolean deleteDirectories;
@@ -21,7 +21,7 @@ public class Target
     ////    init
     ///////////////////////////////////////////////////////
 
-    public Target(int id, int fk_profile, String rootDirectory, boolean isRecursive,
+    public Target(long id, long fk_profile, String rootDirectory, boolean isRecursive,
             boolean doDeleteDirectories)
     {
         this.id = id;
@@ -36,14 +36,24 @@ public class Target
     ////    gets & sets
     ///////////////////////////////////////////////////////
 
-    public int getId()
+    public long getId()
     {
         return id;
     }
 
-    public int getParentProfileId()
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public long getParentProfileId()
     {
         return fk_profile;
+    }
+
+    public void setParentProfileId(long parentProfileId)
+    {
+        this.fk_profile = parentProfileId;
     }
 
     public String getRootDirectory()
@@ -75,4 +85,5 @@ public class Target
     {
         this.deleteDirectories = doDeleteDirectories;
     }
+
 }

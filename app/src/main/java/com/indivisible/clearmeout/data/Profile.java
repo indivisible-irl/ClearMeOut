@@ -1,7 +1,5 @@
 package com.indivisible.clearmeout.data;
 
-import java.util.List;
-
 /**
  * Created by indiv on 15/06/14.
  */
@@ -12,25 +10,36 @@ public class Profile
     ////    data
     ///////////////////////////////////////////////////////
 
-    private int id;
+    private long id = -1;
     private String name;
     private boolean active;
 
-    private Target target;
-    private List<Interval> intervals;
-    private List<Filter> filters;
+    //private Target target;
+    //private List<Interval> intervals;
+    //private List<Filter> filters;
 
 
     ///////////////////////////////////////////////////////
     ////    init
     ///////////////////////////////////////////////////////
 
-    public Profile(int id, String name, boolean isActive)
+    public Profile()
+    {
+        this("NO NAME", false);
+    }
+
+    public Profile(String profileName, boolean isActive)
+    {
+        this(-1, profileName, isActive);
+    }
+
+    public Profile(long id, String profileName, boolean isActive)
     {
         this.id = id;
-        this.name = name;
+        this.name = profileName;
         this.active = isActive;
 
+        //TODO: just grab as required instead of always
         refreshTarget();
         refreshIntervals();
         refreshFilters();
@@ -50,4 +59,41 @@ public class Profile
     {
         //TODO: grab filters from db
     }
+
+
+    ///////////////////////////////////////////////////////
+    ////    gets & sets
+    ///////////////////////////////////////////////////////
+
+    public long getId()
+    {
+        return id;
+    }
+
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public boolean isActive()
+    {
+        return active;
+    }
+
+    public void setActive(boolean isActive)
+    {
+        this.active = active;
+    }
+
+    //TODO: target, filters, intervals
 }

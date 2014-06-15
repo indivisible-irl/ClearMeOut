@@ -56,7 +56,6 @@ public class DbOpenHelper
      * <li><b>2:</b> (text) name</li>
      * </ul>
      */
-    @SuppressWarnings("unused")
     public static final String[] ALL_COLUMNS_PROFILES = {
             COLUMN_GENERIC_ID, COLUMN_GENERIC_ISACTIVE, COLUMN_PROFILE_NAME
     };
@@ -69,7 +68,6 @@ public class DbOpenHelper
      * <li><b>4:</b> (int ) doDeleteDirectories</li>
      * </ul>
      */
-    @SuppressWarnings("unused")
     public static final String[] ALL_COLUMNS_TARGETS = {
             COLUMN_GENERIC_ID, COLUMN_GENERIC_PARENTID, COLUMN_TARGET_DIRECTORY,
             COLUMN_TARGET_ISRECURSIVE, COLUMN_TARGET_DELETEDIRS
@@ -83,7 +81,6 @@ public class DbOpenHelper
      * <li><b>4:</b> (text) data</li>
      * </ul>
      */
-    @SuppressWarnings("unused")
     public static final String[] ALL_COLUMNS_FILTERS = {
             COLUMN_GENERIC_ID, COLUMN_GENERIC_PARENTID, COLUMN_FILTER_TYPE,
             COLUMN_FILTER_ISWHITELIST, COLUMN_FILTER_DATA
@@ -101,7 +98,6 @@ public class DbOpenHelper
      * <li><b>8:</b> (text) data4</li>
      * </ul>
      */
-    @SuppressWarnings("unused")
     public static final String[] ALL_COLUMN_INTERVALS = {
             COLUMN_GENERIC_ID, COLUMN_GENERIC_PARENTID, COLUMN_INTERVAL_TYPE,
             COLUMN_INTERVAL_ISSTRICT, COLUMN_INTERVAL_LASTRUN, COLUMN_INTERVAL_DATA1,
