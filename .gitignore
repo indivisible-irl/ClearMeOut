@@ -15,6 +15,19 @@ gen/
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Eclipse project files
+# OS files
+Thumbs.db
+.DS_Store
+*.swp
+
+# Eclipse files
 .classpath
 .project
+
+# Studio/IDEA files
+import-summary.txt
+.idea
+.gradle
+build/
+app/build
+
