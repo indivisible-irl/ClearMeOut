@@ -62,7 +62,7 @@ public class ProfileSource
 
     public Profile createProfile(String profileName, boolean isActive)
     {
-        ContentValues values = valuesToValues(profileName, isActive);
+        ContentValues values = fieldsToValues(profileName, isActive);
         long id = db.insert(DbOpenHelper.TABLE_PROFILES, null, values);
         return getProfile(id);
     }
@@ -175,15 +175,15 @@ public class ProfileSource
         if (profile.getId() < 0)
         {
             // invalid id, not from db
-            return valuesToValues(profile.getName(), profile.isActive());
+            return fieldsToValues(profile.getName(), profile.isActive());
         }
         else
         {
-            return valuesToValues(profile.getId(), profile.getName(), profile.isActive());
+            return fieldsToValues(profile.getId(), profile.getName(), profile.isActive());
         }
     }
 
-    private ContentValues valuesToValues(String profileName, boolean isActive)
+    private ContentValues fieldsToValues(String profileName, boolean isActive)
     {
         ContentValues values = new ContentValues();
         values.put(DbOpenHelper.COLUMN_PROFILE_NAME, profileName);
@@ -191,12 +191,10 @@ public class ProfileSource
         return values;
     }
 
-    private ContentValues valuesToValues(long id, String profileName, boolean isActive)
+    private ContentValues fieldsToValues(long id, String profileName, boolean isActive)
     {
-        ContentValues values = new ContentValues();
+        ContentValues values = fieldsToValues(profileName, isActive);
         values.put(DbOpenHelper.COLUMN_GENERIC_ID, id);
-        values.put(DbOpenHelper.COLUMN_PROFILE_NAME, profileName);
-        values.put(DbOpenHelper.COLUMN_GENERIC_ISACTIVE, isActive);
         return values;
     }
 

@@ -10,8 +10,8 @@ public class Interval
     ////    data
     ///////////////////////////////////////////////////////
 
-    private int id;
-    private int fk_profile;
+    private long id;
+    private long fk_profile;
     private IntervalType intervalType;
     private boolean strictAlarm;
     private boolean active;
@@ -22,16 +22,26 @@ public class Interval
     ////    init
     ///////////////////////////////////////////////////////
 
+    public Interval()
+    {
+        this(-1L, IntervalType.INVALID, false, false, 0L, new String[0]);
+    }
 
-    public Interval(int id, int fk_profile, IntervalType intervalType, boolean strictAlarm,
-            boolean active, long lastRun, String[] data)
+    public Interval(long parentProfileId, IntervalType intervalType, boolean isStrictAlarm,
+            boolean isActive, long lastRunMillis, String[] data)
+    {
+        this(-1L, parentProfileId, intervalType, isStrictAlarm, isActive, lastRunMillis, data);
+    }
+
+    public Interval(long id, long parentProfileId, IntervalType intervalType,
+            boolean isStrictAlarm, boolean isActive, long lastRunMillis, String[] data)
     {
         this.id = id;
-        this.fk_profile = fk_profile;
+        this.fk_profile = parentProfileId;
         this.intervalType = intervalType;
-        this.strictAlarm = strictAlarm;
-        this.active = active;
-        this.lastRun = lastRun;
+        this.strictAlarm = isStrictAlarm;
+        this.active = isActive;
+        this.lastRun = lastRunMillis;
         this.data = data;
     }
 
@@ -40,14 +50,24 @@ public class Interval
     ////    gets & sets
     ///////////////////////////////////////////////////////
 
-    public int getId()
+    public long getId()
     {
         return id;
     }
 
-    public int getParentProfileId()
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public long getParentProfileId()
     {
         return fk_profile;
+    }
+
+    public void setParentProfileId(long parentProfileId)
+    {
+        this.fk_profile = parentProfileId;
     }
 
     public IntervalType getIntervalType()
@@ -58,6 +78,16 @@ public class Interval
     public void setIntervalType(IntervalType intervalType)
     {
         this.intervalType = intervalType;
+    }
+
+    public boolean isStrictAlarm()
+    {
+        return strictAlarm;
+    }
+
+    public void setStrictAlarm(boolean isStrictAlarm)
+    {
+        this.strictAlarm = isStrictAlarm;
     }
 
     public boolean isActive()

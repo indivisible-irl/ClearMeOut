@@ -125,14 +125,14 @@ public class FilterSource
         if (filter.getId() < 0)
         {
             // invalid id, not from db
-            return valuesToValues(filter.getParentProfileId(),
+            return fieldsToValues(filter.getParentProfileId(),
                     filter.getFilterType(),
                     filter.isWhitelist(),
                     filter.getData());
         }
         else
         {
-            return valuesToValues(filter.getId(),
+            return fieldsToValues(filter.getId(),
                     filter.getParentProfileId(),
                     filter.getFilterType(),
                     filter.isWhitelist(),
@@ -140,7 +140,7 @@ public class FilterSource
         }
     }
 
-    private ContentValues valuesToValues(long parentId,
+    private ContentValues fieldsToValues(long parentId,
                                          FilterType filterType,
                                          boolean isWhitelist,
                                          String data)
@@ -153,18 +153,14 @@ public class FilterSource
         return values;
     }
 
-    private ContentValues valuesToValues(long id,
+    private ContentValues fieldsToValues(long id,
                                          long parentId,
                                          FilterType filterType,
                                          boolean isWhitelist,
                                          String data)
     {
-        ContentValues values = new ContentValues();
+        ContentValues values = fieldsToValues(parentId, filterType, isWhitelist, data);
         values.put(DbOpenHelper.COLUMN_GENERIC_ID, id);
-        values.put(DbOpenHelper.COLUMN_GENERIC_PARENTID, parentId);
-        values.put(DbOpenHelper.COLUMN_FILTER_TYPE, filterType.name());
-        values.put(DbOpenHelper.COLUMN_FILTER_ISWHITELIST, isWhitelist);
-        values.put(DbOpenHelper.COLUMN_FILTER_DATA, data);
         return values;
     }
 }

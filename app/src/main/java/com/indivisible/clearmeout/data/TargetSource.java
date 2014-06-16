@@ -65,7 +65,7 @@ public class TargetSource
                                boolean isRecursive,
                                boolean doDeleteDirs)
     {
-        ContentValues values = valuesToValues(parentId, rootDir, isRecursive, doDeleteDirs);
+        ContentValues values = fieldsToValues(parentId, rootDir, isRecursive, doDeleteDirs);
         long id = db.insert(DbOpenHelper.TABLE_TARGETS, null, values);
         return getTarget(id);
     }
@@ -198,14 +198,14 @@ public class TargetSource
         if (target.getId() < 0)
         {
             // invalid id, not from db
-            return valuesToValues(target.getParentProfileId(),
+            return fieldsToValues(target.getParentProfileId(),
                     target.getRootDirectory(),
                     target.isRecursive(),
                     target.doDeleteDirectories());
         }
         else
         {
-            return valuesToValues(target.getId(),
+            return fieldsToValues(target.getId(),
                     target.getParentProfileId(),
                     target.getRootDirectory(),
                     target.isRecursive(),
@@ -213,7 +213,7 @@ public class TargetSource
         }
     }
 
-    private ContentValues valuesToValues(long parentId,
+    private ContentValues fieldsToValues(long parentId,
                                          String rootDir,
                                          boolean isRecursive,
                                          boolean doDeleteDirs)
@@ -226,18 +226,14 @@ public class TargetSource
         return values;
     }
 
-    private ContentValues valuesToValues(long id,
+    private ContentValues fieldsToValues(long id,
                                          long parentId,
                                          String rootDir,
                                          boolean isRecursive,
                                          boolean doDeleteDirs)
     {
-        ContentValues values = new ContentValues();
+        ContentValues values = fieldsToValues(parentId, rootDir, isRecursive, doDeleteDirs);
         values.put(DbOpenHelper.COLUMN_GENERIC_ID, id);
-        values.put(DbOpenHelper.COLUMN_GENERIC_PARENTID, parentId);
-        values.put(DbOpenHelper.COLUMN_TARGET_DIRECTORY, rootDir);
-        values.put(DbOpenHelper.COLUMN_TARGET_ISRECURSIVE, isRecursive);
-        values.put(DbOpenHelper.COLUMN_TARGET_DELETEDIRS, doDeleteDirs);
         return values;
     }
 }
