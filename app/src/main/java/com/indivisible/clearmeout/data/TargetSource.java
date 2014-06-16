@@ -58,7 +58,12 @@ public class TargetSource
 
     public void close()
     {
-        db.close();
+        try
+        {
+            db.close();
+        }
+        catch (NullPointerException e)
+        {}
     }
 
 
@@ -113,7 +118,7 @@ public class TargetSource
                 null);
         if (cursor.getCount() != 1)
         {
-            Log.e(TAG, "(Get) " + cursor.getCount() + " results found for id: " + id);
+            Log.w(TAG, "(Get) " + cursor.getCount() + " results found for id: " + id);
             cursor.close();
             return new Target();
         }
@@ -142,7 +147,7 @@ public class TargetSource
                 null);
         if (cursor.getCount() != 1)
         {
-            Log.e(TAG, "(getProfileTarget) " + cursor.getCount()
+            Log.w(TAG, "(getProfileTarget) " + cursor.getCount()
                     + " results found for profile id: " + parentProfileId);
             cursor.close();
             return new Target();
@@ -166,7 +171,7 @@ public class TargetSource
         long id = target.getId();
         if (id < 0)
         {
-            Log.e(TAG, "(Update) Invalid id: " + id + " / " + target.getRootDirectory());
+            Log.e(TAG, "(Update) Invalid id: " + id + " || root: " + target.getRootDirectory());
             return false;
         }
         else

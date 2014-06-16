@@ -2,27 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <fragment
-        android:name="com.indivisible.clearmeout.fragment.BreadcrumbFragment"
+    <FrameLayout
+        android:id="@+id/generic_breadcrumbs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout="@layout/frag_breadcrumbs"/>
+        />
 
     <fragment
+        android:id="@+id/profile_listview"
         android:name="com.indivisible.clearmeout.fragment.ProfileListFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        />
+        tools:layout="@layout/frag_profile_list"/>
 
     <!-- To be used for confirming deletes etc -->
     <FrameLayout
-        android:id="@+id/profile_fragment_bottom"
+        android:id="@+id/generic_bottom_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
 
 </LinearLayout>

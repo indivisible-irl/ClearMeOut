@@ -2,7 +2,6 @@ package com.indivisible.clearmeout.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +26,7 @@ public class BreadcrumbFragment
 
     private TextView textViewTrail;
 
+    private static final String START = "|> ";
     private static final String SEP = " > ";
     private static final String KEY_TRAIL_ARRAY = "breadcrumb_trail_array";
     private static final String TAG = "bCrumbFrag";
@@ -36,17 +36,9 @@ public class BreadcrumbFragment
     ////    init
     ///////////////////////////////////////////////////////
 
-
-    public static final BreadcrumbFragment newInstance(String initialCrumb)
-    {
-        String[] trailArray = new String[] {
-            initialCrumb
-        };
-        return newInstance(trailArray);
-    }
-
     public static final BreadcrumbFragment newInstance(String[] trailArray)
     {
+        Log.v(TAG, "newInstance...");
         BreadcrumbFragment frag = new BreadcrumbFragment();
         if (trailArray != null)
         {
@@ -54,6 +46,7 @@ public class BreadcrumbFragment
             args.putStringArray(KEY_TRAIL_ARRAY, trailArray);
             frag.setArguments(args);
         }
+        Log.v(TAG, "...returning instance");
         return frag;
     }
 
@@ -61,8 +54,10 @@ public class BreadcrumbFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Log.v(TAG, "onCreate (after super)...");
         trailParts = new ArrayList<String>();
         Bundle args = getArguments();
+        Log.v(TAG, "...parsing args...");
         if (args != null)
         {
             String[] trailArray = args.getStringArray(KEY_TRAIL_ARRAY);
@@ -74,6 +69,7 @@ public class BreadcrumbFragment
                 }
             }
         }
+        Log.v(TAG, "...args parsed, end of onCreate");
     }
 
     @Override
@@ -81,16 +77,12 @@ public class BreadcrumbFragment
                              ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.frag_breadcrumbs, container);
+        Log.v(TAG, "creating view...");
+        View view = inflater.inflate(R.layout.frag_breadcrumbs, container, false);
         textViewTrail = (TextView) view.findViewById(R.id.bcrumb_text_trail);
         setTrailText();
+        Log.v(TAG, "...returning view");
         return view;
-    }
-
-    @Override
-    public void onAttach(Activity activity)
-    {
-        super.onAttach(activity);
     }
 
 
@@ -130,8 +122,9 @@ public class BreadcrumbFragment
     ////    trail handling
     ///////////////////////////////////////////////////////
 
-    private void setTrailText()
+    public void setTrailText()
     {
+        Log.v(TAG, "setting text...");
         if (trailParts.isEmpty())
         {
             Log.e(TAG, "(setText) No trailParts to use");
@@ -146,5 +139,6 @@ public class BreadcrumbFragment
             }
             textViewTrail.setText(sb.toString());
         }
+        Log.v(TAG, "...text set");
     }
 }

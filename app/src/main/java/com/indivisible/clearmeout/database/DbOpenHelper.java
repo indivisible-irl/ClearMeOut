@@ -19,7 +19,7 @@ public class DbOpenHelper
     // keys & versions
 
     public static final String DATABASE_NAME = "ClearMeOut_profiles.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 11;
 
     public static final String TABLE_PROFILES = "profiles";
     public static final String TABLE_TARGETS = "targets";
@@ -127,20 +127,22 @@ public class DbOpenHelper
             + COLUMN_GENERIC_ID + " integer primary key autoincrement, "    //  tidy
             + COLUMN_GENERIC_PARENTID + " integer not null, "               //  code
             + COLUMN_FILTER_TYPE + " text not null, "                       //  that
-            + COLUMN_FILTER_ISWHITELIST + " integer not null, "             //  was
+            + COLUMN_GENERIC_ISACTIVE + " integer not null, "               //  was
+            + COLUMN_FILTER_ISWHITELIST + " integer not null, "             //  very
             + COLUMN_FILTER_DATA + " text not null );";                     //  painstakingly
 
     private static final String CREATE_TABLE_INTERVALS = "create table "    //  positioned
             + TABLE_INTERVALS + " ( "                                       //  to
             + COLUMN_GENERIC_ID + " integer primary key autoincrement, "    //  make
             + COLUMN_GENERIC_PARENTID + " integer not null, "               //  it
-            + COLUMN_INTERVAL_TYPE + " text not null, "                     //  easy
+            + COLUMN_INTERVAL_TYPE + " text not null, "                     //  very
+            + COLUMN_GENERIC_ISACTIVE + " integer not null, "               //  easy
             + COLUMN_INTERVAL_ISSTRICT + " integer not null, "              //  to
             + COLUMN_INTERVAL_LASTRUN + " integer not null, "               //  follow
             + COLUMN_INTERVAL_DATA1 + " text, "                             //  the
             + COLUMN_INTERVAL_DATA2 + " text, "                             //  table
             + COLUMN_INTERVAL_DATA3 + " text, "                             //  create
-            + COLUMN_INTERVAL_DATA4 + " text, );";                          //  statements
+            + COLUMN_INTERVAL_DATA4 + " text );";                           //  statements
 
 
     ///////////////////////////////////////////////////////

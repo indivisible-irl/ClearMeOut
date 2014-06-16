@@ -58,7 +58,12 @@ public class ProfileSource
 
     public void close()
     {
-        db.close();
+        try
+        {
+            db.close();
+        }
+        catch (NullPointerException e)
+        {}
     }
 
 

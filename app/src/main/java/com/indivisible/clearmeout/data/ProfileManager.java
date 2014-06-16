@@ -33,7 +33,8 @@ public class ProfileManager
 
     public ProfileManager(Context context)
     {
-        this.context = context.getApplicationContext();
+        //this.context = context.getApplicationContext();
+        this.context = context;
         profileSource = new ProfileSource(context);
         targetSource = new TargetSource(context);
         filterSource = new FilterSource(context);
@@ -52,7 +53,8 @@ public class ProfileManager
         {
             profileSource.openReadable();
             profile = profileSource.getProfile(profileId);
-            return loadAll(profile);
+            loadAll(profile);
+            return profile;
         }
         catch (SQLException e)
         {
@@ -75,7 +77,7 @@ public class ProfileManager
             profiles = profileSource.getAllProfiles();
             for (Profile profile : profiles)
             {
-                profile = loadAll(profile);
+                loadAll(profile);
             }
         }
         catch (SQLException e)
@@ -86,8 +88,6 @@ public class ProfileManager
         {
             profileSource.close();
         }
-
-
         return profiles;
     }
 
@@ -96,7 +96,7 @@ public class ProfileManager
     ////    load
     ///////////////////////////////////////////////////////
 
-    public Profile loadAll(Profile profile)
+    public void loadAll(Profile profile)
     {
         if (profile.getId() < 0)
         {
@@ -104,13 +104,12 @@ public class ProfileManager
                     "(loadAll) Invalid profile id: " + profile.getId() + " / "
                             + profile.getName());
         }
-        profile = loadTarget(profile);
-        profile = loadFilters(profile);
-        profile = loadIntervals(profile);
-        return profile;
+        loadTarget(profile);
+        loadFilters(profile);
+        loadIntervals(profile);
     }
 
-    public Profile loadTarget(Profile profile)
+    public void loadTarget(Profile profile)
     {
         Target target;
         try
@@ -128,10 +127,9 @@ public class ProfileManager
             targetSource.close();
         }
         profile.setTarget(target);
-        return profile;
     }
 
-    public Profile loadFilters(Profile profile)
+    public void loadFilters(Profile profile)
     {
         List<Filter> filters;
         try
@@ -149,10 +147,9 @@ public class ProfileManager
             filterSource.close();
         }
         profile.setFilters(filters);
-        return profile;
     }
 
-    public Profile loadIntervals(Profile profile)
+    public void loadIntervals(Profile profile)
     {
         List<Interval> intervals;
         try
@@ -170,6 +167,51 @@ public class ProfileManager
             intervalSource.close();
         }
         profile.setIntervals(intervals);
-        return profile;
+    }
+
+
+    ///////////////////////////////////////////////////////
+    ////    testing
+    ///////////////////////////////////////////////////////
+
+    public void loadTestData()
+    {
+        // profiles
+        Profile p1 = new Profile("First", false);
+        Profile p2 = new Profile("Second", true);
+        Profile p3 = new Profile("Third", false);
+        try
+        {
+            profileSource.openWriteable();
+            p1 = profileSource.createProfile(p1);
+            p2 = profileSource.createProfile(p2);
+            p3 = profileSource.createProfile(p3);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            profileSource.close();
+        }
+
+        // targets
+        Target t1 = new Target(p1.getId(), "/some/dir", true, false);
+        Target t2 = new Target(p2.getId(), "/another/dir", false, true);
+        try
+        {
+            targetSource.openWriteable();
+            t1 = targetSource.createTarget(t1);
+            t2 = targetSource.createTarget(t2);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            targetSource.close();
+        }
     }
 }
