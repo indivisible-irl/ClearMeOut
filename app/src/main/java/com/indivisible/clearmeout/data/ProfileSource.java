@@ -1,6 +1,8 @@
 package com.indivisible.clearmeout.data;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,6 +22,10 @@ public class ProfileSource
 
     private SQLiteDatabase db;
     private DbOpenHelper dbHelper;
+
+    private static final int INDEX_ID = 0;
+    private static final int INDEX_NAME = 1;
+    private static final int INDEX_ISACTIVE = 2;
 
     private static final String TAG = "ProfileSrc";
 
@@ -60,6 +66,24 @@ public class ProfileSource
     ////    CRUD
     ///////////////////////////////////////////////////////
 
+    public Profile createOrUpdateProfile(Profile profile)
+    {
+        if (profile.getId() < 0)
+        {
+            return createProfile(profile);
+        }
+        else
+        {
+            updateProfile(profile);
+            return profile;
+        }
+    }
+
+    public Profile createProfile(Profile profile)
+    {
+        return createProfile(profile.getName(), profile.isActive());
+    }
+
     public Profile createProfile(String profileName, boolean isActive)
     {
         ContentValues values = fieldsToValues(profileName, isActive);
@@ -78,14 +102,45 @@ public class ProfileSource
                 null);
         if (cursor.getCount() != 1)
         {
-            Log.e(TAG, "Get: " + cursor.getCount() + " results found for id: " + id);
+            Log.e(TAG, "(Get) " + cursor.getCount() + " results found for id: " + id);
             cursor.close();
             return new Profile();
         }
-        cursor.moveToFirst();
-        Profile profile = cursorToProfile(cursor);
+
+        Profile profile;
+        if (cursor.moveToFirst())
+        {
+            profile = cursorToProfile(cursor);
+        }
+        else
+        {
+            profile = new Profile();
+        }
         cursor.close();
         return profile;
+    }
+
+    public List<Profile> getAllProfiles()
+    {
+        Cursor cursor = db.query(DbOpenHelper.TABLE_PROFILES,
+                DbOpenHelper.ALL_COLUMNS_PROFILES,
+                null,
+                null,
+                null,
+                null,
+                null);
+        Log.i(TAG, "(getAll) Number of results: " + cursor.getCount());
+
+        List<Profile> allProfiles = new ArrayList<Profile>();
+        if (cursor.moveToFirst())
+        {
+            while (!cursor.isAfterLast())
+            {
+                allProfiles.add(cursorToProfile(cursor));
+                cursor.moveToNext();
+            }
+        }
+        return allProfiles;
     }
 
     public boolean updateProfile(Profile profile)
@@ -93,7 +148,7 @@ public class ProfileSource
         long id = profile.getId();
         if (id < 0)
         {
-            Log.e(TAG, "Update: Invalid id: " + id + " / " + profile.getName());
+            Log.e(TAG, "(Update) Invalid id: " + id + " / " + profile.getName());
             return false;
         }
         else
@@ -109,12 +164,12 @@ public class ProfileSource
                     return true;
                 case 0:
                     Log.e(TAG,
-                            "Update: Didn't update, no id match: " + id + " / "
+                            "(Update) Didn't update, no id match: " + id + " / "
                                     + profile.getName());
                     return false;
                 default:
                     Log.e(TAG,
-                            "Update: Too many rows affected: " + id + " / "
+                            "(Update) Too many rows affected: " + id + " / "
                                     + profile.getName());
                     return false;
             }
@@ -136,12 +191,18 @@ public class ProfileSource
             case 1:
                 return true;
             case 0:
-                Log.e(TAG, "Delete: Didn't delete, no id match: " + id);
+                Log.e(TAG, "(Delete) Didn't delete, no id match: " + id);
                 return false;
             default:
-                Log.e(TAG, "Delete: Too many rows affected: " + id);
+                Log.e(TAG, "(Delete) Too many rows affected: " + id);
                 return false;
         }
+    }
+
+    public int deleteAllProfiles()
+    {
+        int rowsDeleted = db.delete(DbOpenHelper.TABLE_PROFILES, null, null);
+        return rowsDeleted;
     }
 
 
@@ -152,9 +213,9 @@ public class ProfileSource
     private Profile cursorToProfile(Cursor cursor)
     {
         Profile profile = new Profile();
-        profile.setId(cursor.getLong(0));
-        profile.setName(cursor.getString(1));
-        switch (cursor.getInt(2))
+        profile.setId(cursor.getLong(INDEX_ID));
+        profile.setName(cursor.getString(INDEX_NAME));
+        switch (cursor.getInt(INDEX_ISACTIVE))
         {
             case 0:
                 profile.setActive(false);
@@ -163,8 +224,9 @@ public class ProfileSource
                 profile.setActive(true);
                 break;
             default:
-                Log.e(TAG, "Error getting parsing int for boolean: " + cursor.getInt(2)
-                        + " / " + profile.getName());
+                Log.e(TAG,
+                        "(isActive) Error parsing int for boolean: "
+                                + cursor.getInt(INDEX_ISACTIVE) + " / " + profile.getName());
                 break;
         }
         return profile;

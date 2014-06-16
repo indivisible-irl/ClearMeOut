@@ -21,6 +21,12 @@ public class TargetSource
     private SQLiteDatabase db;
     private DbOpenHelper dbHelper;
 
+    private static final int INDEX_ID = 0;
+    private static final int INDEX_FK = 1;
+    private static final int INDEX_ROOTDIR = 2;
+    private static final int INDEX_RECURSIVE = 3;
+    private static final int INDEX_DELETEDIRS = 4;
+
     private static final String TAG = "TargetSrc";
 
 
@@ -60,6 +66,27 @@ public class TargetSource
     ////    CRUD
     ///////////////////////////////////////////////////////
 
+    public Target createOrUpdateTarget(Target target)
+    {
+        if (target.getId() < 0)
+        {
+            return createTarget(target);
+        }
+        else
+        {
+            updateTarget(target);
+            return target;
+        }
+    }
+
+    public Target createTarget(Target target)
+    {
+        return createTarget(target.getParentProfileId(),
+                target.getRootDirectory(),
+                target.isRecursive(),
+                target.doDeleteDirectories());
+    }
+
     public Target createTarget(long parentId,
                                String rootDir,
                                boolean isRecursive,
@@ -86,12 +113,50 @@ public class TargetSource
                 null);
         if (cursor.getCount() != 1)
         {
-            Log.e(TAG, "Get: " + cursor.getCount() + " results found for id: " + id);
+            Log.e(TAG, "(Get) " + cursor.getCount() + " results found for id: " + id);
             cursor.close();
             return new Target();
         }
-        cursor.moveToFirst();
-        Target target = cursorToTarget(cursor);
+
+        Target target;
+        if (cursor.moveToFirst())
+        {
+            target = cursorToTarget(cursor);
+        }
+        else
+        {
+            target = new Target();
+        }
+        cursor.close();
+        return target;
+    }
+
+    public Target getProfileTarget(long parentProfileId)
+    {
+        Cursor cursor = db.query(DbOpenHelper.TABLE_TARGETS,
+                DbOpenHelper.ALL_COLUMNS_TARGETS,
+                DbOpenHelper.COLUMN_GENERIC_PARENTID + " = " + parentProfileId,
+                null,
+                null,
+                null,
+                null);
+        if (cursor.getCount() != 1)
+        {
+            Log.e(TAG, "(getProfileTarget) " + cursor.getCount()
+                    + " results found for profile id: " + parentProfileId);
+            cursor.close();
+            return new Target();
+        }
+
+        Target target;
+        if (cursor.moveToFirst())
+        {
+            target = cursorToTarget(cursor);
+        }
+        else
+        {
+            target = new Target();
+        }
         cursor.close();
         return target;
     }
@@ -101,7 +166,7 @@ public class TargetSource
         long id = target.getId();
         if (id < 0)
         {
-            Log.e(TAG, "Update: Invalid id: " + id + " / " + target.getRootDirectory());
+            Log.e(TAG, "(Update) Invalid id: " + id + " / " + target.getRootDirectory());
             return false;
         }
         else
@@ -117,12 +182,12 @@ public class TargetSource
                     return true;
                 case 0:
                     Log.e(TAG,
-                            "Update: Didn't update, no id match: " + id + " / "
+                            "(Update) Didn't update, no id match: " + id + " / "
                                     + target.getRootDirectory());
                     return false;
                 default:
                     Log.e(TAG,
-                            "Update: Too many rows affected: " + id + " / "
+                            "(Update) Too many rows affected: " + id + " / "
                                     + target.getRootDirectory());
                     return false;
             }
@@ -144,12 +209,30 @@ public class TargetSource
             case 1:
                 return true;
             case 0:
-                Log.e(TAG, "Delete: Didn't delete, no id match: " + id);
+                Log.e(TAG, "(Delete) Didn't delete, no id match: " + id);
                 return false;
             default:
-                Log.e(TAG, "Delete: Too many rows affected: " + id);
+                Log.e(TAG, "(Delete) Too many rows affected: " + id);
                 return false;
         }
+    }
+
+    public int deleteAllProfileTargets(Profile profile)
+    {
+        return deleteAllProfileTargets(profile.getId());
+    }
+
+    public int deleteAllProfileTargets(long parentProfileId)
+    {
+        if (parentProfileId < 0)
+        {
+            Log.e(TAG, "(deleteAll) Invalid id: " + parentProfileId);
+            return -1;
+        }
+        int rowsDeleted = db.delete(DbOpenHelper.TABLE_TARGETS,
+                DbOpenHelper.COLUMN_GENERIC_PARENTID + " = " + parentProfileId,
+                null);
+        return rowsDeleted;
     }
 
     ///////////////////////////////////////////////////////
@@ -159,10 +242,10 @@ public class TargetSource
     private Target cursorToTarget(Cursor cursor)
     {
         Target target = new Target();
-        target.setId(cursor.getLong(0));
-        target.setParentProfileId(cursor.getLong(1));
-        target.setRootDirectory(cursor.getString(2));
-        switch (cursor.getInt(3))
+        target.setId(cursor.getLong(INDEX_ID));
+        target.setParentProfileId(cursor.getLong(INDEX_FK));
+        target.setRootDirectory(cursor.getString(INDEX_ROOTDIR));
+        switch (cursor.getInt(INDEX_RECURSIVE))
         {
             case 0:
                 target.setRecursive(false);
@@ -173,10 +256,11 @@ public class TargetSource
             default:
                 Log.e(TAG,
                         "(recursive) Error getting parsing int for boolean: "
-                                + cursor.getInt(3) + " / " + target.getRootDirectory());
+                                + cursor.getInt(INDEX_RECURSIVE) + " / "
+                                + target.getRootDirectory());
                 break;
         }
-        switch (cursor.getInt(4))
+        switch (cursor.getInt(INDEX_DELETEDIRS))
         {
             case 0:
                 target.setDeleteDirectories(false);
@@ -187,7 +271,8 @@ public class TargetSource
             default:
                 Log.e(TAG,
                         "(deleteDirs) Error getting parsing int for boolean: "
-                                + cursor.getInt(4) + " / " + target.getRootDirectory());
+                                + cursor.getInt(INDEX_DELETEDIRS) + " / "
+                                + target.getRootDirectory());
                 break;
         }
         return target;

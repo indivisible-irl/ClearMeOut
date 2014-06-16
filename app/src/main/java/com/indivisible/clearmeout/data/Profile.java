@@ -1,5 +1,7 @@
 package com.indivisible.clearmeout.data;
 
+import java.util.List;
+
 /**
  * Created by indiv on 15/06/14.
  */
@@ -14,9 +16,9 @@ public class Profile
     private String name;
     private boolean active;
 
-    //private Target target;
-    //private List<Interval> intervals;
-    //private List<Filter> filters;
+    private Target target;
+    private List<Interval> intervals;
+    private List<Filter> filters;
 
 
     ///////////////////////////////////////////////////////
@@ -38,26 +40,6 @@ public class Profile
         this.id = id;
         this.name = profileName;
         this.active = isActive;
-
-        //TODO: just grab as required instead of always
-        refreshTarget();
-        refreshIntervals();
-        refreshFilters();
-    }
-
-    public void refreshTarget()
-    {
-        //TODO: grab target from db
-    }
-
-    public void refreshIntervals()
-    {
-        //TODO: grab intervals from db
-    }
-
-    public void refreshFilters()
-    {
-        //TODO: grab filters from db
     }
 
 
@@ -95,5 +77,33 @@ public class Profile
         this.active = active;
     }
 
-    //TODO: target, filters, intervals
+    public Target getTarget()
+    {
+        return this.target;
+    }
+
+    public void setTarget(Target target)
+    {
+        this.target = target;
+    }
+
+    public List<Filter> getFilters()
+    {
+        return this.filters;
+    }
+
+    public void setFilters(List<Filter> filters)
+    {
+        this.filters = filters;
+    }
+
+    public List<Interval> getIntervals()
+    {
+        return this.intervals;
+    }
+
+    public void setIntervals(List<Interval> intervals)
+    {
+        this.intervals = intervals;
+    }
 }
