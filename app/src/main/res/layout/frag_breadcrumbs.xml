@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+
+              android:orientation="vertical">
+
+    <!-- TODO: Dynamic buttons instead of text -->
+    <TextView
+        android:id="@+id/bcrumb_text_trail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:text="No text yet"
+        />
+
+    <View
+        android:id="@+id/bcrumb_divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#0099cc"/>
+
+</LinearLayout>
