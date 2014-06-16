@@ -106,4 +106,21 @@ public class Profile
     {
         this.intervals = intervals;
     }
+
+
+    ///////////////////////////////////////////////////////
+    ////    util
+    ///////////////////////////////////////////////////////
+
+    @Override
+    public String toString()
+    {
+        //TODO: clean up toString to just 'name' later
+        return id + "/" + name;
+    }
+
+    public String debugContent()
+    {
+        return "t_" + target.getId() + " / f_" + filters.size() + " / i_" + intervals.size();
+    }
 }

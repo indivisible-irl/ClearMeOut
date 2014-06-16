@@ -26,6 +26,7 @@ public class Filter
     {
         this(-1L, FilterType.INVALID, false, false, "NO DATA");
     }
+
     public Filter(long parentProfileId, FilterType filterType, boolean isActive,
             boolean isWhitelist, String data)
     {
@@ -109,4 +110,18 @@ public class Filter
     }
 
 
+    ///////////////////////////////////////////////////////
+    ////    util
+    ///////////////////////////////////////////////////////
+
+    @Override
+    public String toString()
+    {
+        return id + ": " + filterType.name();
+    }
+
+    public String debugContent()
+    {
+        return "p_" + fk_profile + " / w_" + whitelist + " / a_" + active + "\n" + data;
+    }
 }

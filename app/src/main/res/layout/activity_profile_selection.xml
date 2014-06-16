@@ -18,6 +18,7 @@
         android:layout_weight="1"
         />
 
+    <!-- To be used for confirming deletes etc -->
     <FrameLayout
         android:id="@+id/profile_fragment_bottom"
         android:layout_width="match_parent"

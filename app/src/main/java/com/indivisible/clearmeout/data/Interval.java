@@ -120,4 +120,20 @@ public class Interval
         this.data = data;
     }
 
+
+    ///////////////////////////////////////////////////////
+    ////    util
+    ///////////////////////////////////////////////////////
+
+    @Override
+    public String toString()
+    {
+        return id + ": " + intervalType.name();
+    }
+
+    public String debugContent()
+    {
+        return "p_" + fk_profile + " / s_" + strictAlarm + " / a_" + active + "\nr_" + lastRun
+                + " / d_" + data.length;
+    }
 }

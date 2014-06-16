@@ -97,4 +97,19 @@ public class Target
         this.deleteDirectories = doDeleteDirectories;
     }
 
+
+    ///////////////////////////////////////////////////////
+    ////    util
+    ///////////////////////////////////////////////////////
+
+    @Override
+    public String toString()
+    {
+        return id + ": " + rootDirectory;
+    }
+
+    public String debugContent()
+    {
+        return "p_" + fk_profile + " / r_" + recursive + " / d_" + deleteDirectories;
+    }
 }
