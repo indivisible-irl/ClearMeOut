@@ -10,8 +10,8 @@ public class Filter
     ////    data
     ///////////////////////////////////////////////////////
 
-    private int id;
-    private int fk_profile;
+    private long id;
+    private long fk_profile;
     private FilterType filterType;
     private boolean active;
     private boolean whitelist;
@@ -22,11 +22,21 @@ public class Filter
     ////    init
     ///////////////////////////////////////////////////////
 
-    public Filter(int id, int fk_profile, FilterType filterType, boolean isActive,
+    public Filter()
+    {
+        this(-1L, FilterType.INVALID, false, false, "NO DATA");
+    }
+    public Filter(long parentProfileId, FilterType filterType, boolean isActive,
+            boolean isWhitelist, String data)
+    {
+        this(-1L, parentProfileId, filterType, isActive, isWhitelist, data);
+    }
+
+    public Filter(long id, long parentProfileId, FilterType filterType, boolean isActive,
             boolean isWhitelist, String data)
     {
         this.id = id;
-        this.fk_profile = fk_profile;
+        this.fk_profile = parentProfileId;
         this.filterType = filterType;
         this.active = isActive;
         this.whitelist = isWhitelist;
@@ -38,14 +48,24 @@ public class Filter
     ////    get & set
     ///////////////////////////////////////////////////////
 
-    public int getId()
+    public long getId()
     {
         return id;
     }
 
-    public int getParentProfileId()
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public long getParentProfileId()
     {
         return fk_profile;
+    }
+
+    public void setParentProfileId(long parentProfileId)
+    {
+        this.fk_profile = parentProfileId;
     }
 
     public FilterType getFilterType()

@@ -10,5 +10,6 @@ public enum FilterType
     DIR_NAME,           // directory name
     DATE_CREATED,       // file creation times
     DATE_MODIFIED,      // file modify times
-    DATE_ACCESSED;      // file access times
+    DATE_ACCESSED,      // file access times
+    INVALID;            // error or unset
 }

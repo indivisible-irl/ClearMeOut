@@ -21,7 +21,7 @@ public class TargetSource
     private SQLiteDatabase db;
     private DbOpenHelper dbHelper;
 
-    private static final String TAG = "TargetSource";
+    private static final String TAG = "TargetSrc";
 
 
     ///////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ public class TargetSource
                 null);
         if (cursor.getCount() != 1)
         {
-            Log.v(TAG, "Get: " + cursor.getCount() + " results found for id: " + id);
+            Log.e(TAG, "Get: " + cursor.getCount() + " results found for id: " + id);
             cursor.close();
             return new Target();
         }
@@ -133,6 +133,7 @@ public class TargetSource
     {
         return deleteTarget(target.getId());
     }
+
     public boolean deleteTarget(long id)
     {
         int rowsDeleted = db.delete(DbOpenHelper.TABLE_PROFILES,

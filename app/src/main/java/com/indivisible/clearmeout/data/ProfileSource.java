@@ -21,7 +21,7 @@ public class ProfileSource
     private SQLiteDatabase db;
     private DbOpenHelper dbHelper;
 
-    private static final String TAG = "ProfileSource";
+    private static final String TAG = "ProfileSrc";
 
 
     ///////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ public class ProfileSource
                 null);
         if (cursor.getCount() != 1)
         {
-            Log.v(TAG, "Get: " + cursor.getCount() + " results found for id: " + id);
+            Log.e(TAG, "Get: " + cursor.getCount() + " results found for id: " + id);
             cursor.close();
             return new Profile();
         }
