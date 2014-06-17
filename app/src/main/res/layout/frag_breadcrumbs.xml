@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <!-- TODO: Dynamic buttons instead of text -->
     <TextView
@@ -17,10 +17,10 @@
         android:text="No text yet"
         />
 
-    <View
-        android:id="@+id/bcrumb_divider"
+    <include
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#0099cc"/>
+        android:layout_height="1.5dp"
+        layout="@layout/my_div"
+        />
 
 </LinearLayout>

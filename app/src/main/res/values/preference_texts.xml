@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- preference keys defined in 'preference_keys.xml'
+         as no need for them to be multilingual           -->
+
+    <!-- categories -->
+    <string name="category_profile">Profile</string>
+    <string name="category_configure">Configure</string>
+
+    <!-- titles -->
+    <string name="title_generic_isActive">Active?</string>
+
+    <string name="title_profile_name">Profile: %s</string>
+    <string name="title_profile_nextRun">Next scheduled run</string>
+
+    <string name="title_target_rootDir">Target directory</string>
+    <string name="title_target_isRecursive">Recursive Clear?</string>
+    <string name="title_target_doDeleteDirs">Delete directories too?</string>
+
+    <string name="title_intent_filters">Configure Filters&#8230;</string>
+    <string name="title_intent_intervals">Configure Intervals&#8230;</string>
+
+
+    <!-- Summaries -->
+    <string name="summary_profile_name">Click to modify name</string>
+    <string name="summanyOn_profile_isActive">Profile is enabled</string>
+    <string name="summaryOff_profile_isActive">Profile is disabled</string>
+    <string name="summary_profile_nextRun">Will occur in: %s</string>
+
+    <string name="summary_target_rootDir">Dir: %1$s</string>
+    <string name="summaryOn_target_isRecursive">Will Clear sub-directories too</string>
+    <string name="summaryOff_target_isRecursive">Will leave sub-directories untouched</string>
+    <string name="summaryOn_target_doDeleteDirs">Will delete empty sub-directories on Clear</string>
+    <string name="summaryOff_target_doDeleteDirs">Will only Clear files, directories untouched</string>
+
+    <string name="summary_intent_filters">%d of Y Filters active</string>
+    <string name="summary_intent_intervals">%d of Y Intervals active</string>
+
+    <!-- TODO: Filter and Interval pref texts -->
+
+</resources>

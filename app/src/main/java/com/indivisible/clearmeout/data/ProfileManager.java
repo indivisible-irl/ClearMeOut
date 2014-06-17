@@ -48,9 +48,13 @@ public class ProfileManager
 
     public Profile getProfile(long profileId)
     {
-        Profile profile;
+        if (profileId < 0)
+        {
+            return makeEmptyProfile();
+        }
         try
         {
+            Profile profile;
             profileSource.openReadable();
             profile = profileSource.getProfile(profileId);
             loadAll(profile);
@@ -60,7 +64,7 @@ public class ProfileManager
         {
             Log.e(TAG, "(getProfile) Error reading database");
             e.printStackTrace();
-            return new Profile();
+            return makeEmptyProfile();
         }
         finally
         {
@@ -167,6 +171,20 @@ public class ProfileManager
             intervalSource.close();
         }
         profile.setIntervals(intervals);
+    }
+
+
+    ///////////////////////////////////////////////////////
+    ////    util
+    ///////////////////////////////////////////////////////
+
+    public Profile makeEmptyProfile()
+    {
+        Profile emptyProfile = new Profile();
+        emptyProfile.setName("INVALID PROFILE");
+        Target emptyTarget = new Target();
+        emptyProfile.setTarget(emptyTarget);
+        return emptyProfile;
     }
 
 

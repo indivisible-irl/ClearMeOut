@@ -71,6 +71,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.indivisible.clearmeout.activity.ProfileDetailsActivity"
+            android:label="@string/app_name">
+        </activity>
         <!-- File browsers -->
         <activity
             android:name="com.mburman.fileexplore.FileExplore"

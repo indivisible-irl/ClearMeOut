@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- preference keys -->
+    <string name="key_profile_name">profile_Name</string>
+    <string name="key_profile_isActive">profile_isActive</string>
+    <string name="key_profile_nextRun">profile_nextRun</string>
+
+    <string name="key_target_rootDirectory">target_rootDirectory</string>
+    <string name="key_target_isRecursive">target_isRecursive</string>
+    <string name="key_target_doDeleteDirs">target_doDeleteDirs</string>
+
+    <string name="key_intent_filters">intent_filters</string>
+    <string name="key_intent_intervals">intent_intervals</string>
+
+    <string name="key_filter_filterType">filter_filterType</string>
+    <string name="key_filter_isActive">filter_isActive</string>
+    <string name="key_filter_isWhitelist">filter_isWhitelist</string>
+    <string name="key_filter_data">filter_data</string>
+
+    <string name="key_interval_intervalType">interval_intervalType</string>
+    <string name="key_interval_isActive">interval_isActive</string>
+    <string name="key_interval_isStrictAlarm">interval_isStrictAlarm</string>
+    <string name="key_interval_lastRunMillis">interval_lastRunMillis</string>
+    <string name="key_interval_data1">interval_data1</string>
+    <string name="key_interval_data2">interval_data2</string>
+    <string name="key_interval_data3">interval_data3</string>
+    <string name="key_interval_data4">interval_data4</string>
+
+</resources>

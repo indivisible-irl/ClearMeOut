@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Profile">
+
+        <EditTextPreference
+            android:key="@string/key_profile_name"
+            android:title="@string/title_profile_name"
+            android:summary="@string/summary_profile_name"
+            android:persistent="false"
+            />
+        <EditTextPreference
+            android:key="@string/key_target_rootDirectory"
+            android:title="@string/title_target_rootDir"
+            android:summary="@string/summary_target_rootDir"
+            android:persistent="false"
+            />
+        <!-- TODO: Action bar On/Off instead -->
+        <CheckBoxPreference
+            android:key="@string/key_profile_isActive"
+            android:title="@string/title_generic_isActive"
+            android:summaryOn="@string/summanyOn_profile_isActive"
+            android:summaryOff="@string/summaryOff_profile_isActive"
+            android:persistent="false"
+            />
+        <Preference
+            android:key="@string/key_profile_nextRun"
+            android:title="@string/title_profile_nextRun"
+            android:summary="@string/summary_profile_nextRun"
+            android:persistent="false"
+            />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Configure">
+
+        <CheckBoxPreference
+            android:key="@string/key_target_isRecursive"
+            android:title="@string/title_target_isRecursive"
+            android:summaryOn="@string/summaryOn_target_isRecursive"
+            android:summaryOff="@string/summaryOff_target_isRecursive"
+            android:persistent="false"
+            />
+        <CheckBoxPreference
+            android:key="@string/key_target_doDeleteDirs"
+            android:title="@string/title_target_doDeleteDirs"
+            android:summaryOn="@string/summaryOn_target_doDeleteDirs"
+            android:summaryOff="@string/summaryOff_target_doDeleteDirs"
+            android:persistent="false"
+            />
+
+        <!-- child Filter and Interval config intents -->
+        <Preference
+            android:key="@string/key_intent_filters"
+            android:title="@string/title_intent_filters"
+            android:summary="@string/summary_intent_filters"
+            android:persistent="false"
+            />
+        <Preference
+            android:key="@string/key_intent_intervals"
+            android:title="@string/title_intent_intervals"
+            android:summary="@string/summary_intent_intervals"
+            android:persistent="false"
+            />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

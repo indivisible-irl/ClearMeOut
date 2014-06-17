@@ -100,7 +100,7 @@ public class IntervalSource
                 interval.getIntervalType(),
                 interval.isActive(),
                 interval.isStrictAlarm(),
-                interval.getLastRun(),
+                interval.getLastRunMillis(),
                 interval.getData());
     }
 
@@ -288,7 +288,7 @@ public class IntervalSource
                                 + " / " + interval.getIntervalType().name());
                 break;
         }
-        interval.setLastRun(cursor.getLong(INDEX_LASTRUN));
+        interval.setLastRunMillis(cursor.getLong(INDEX_LASTRUN));
         interval.setData(getDataFromCursor(cursor));
         return interval;
     }
@@ -302,7 +302,7 @@ public class IntervalSource
                     interval.getIntervalType(),
                     interval.isActive(),
                     interval.isStrictAlarm(),
-                    interval.getLastRun(),
+                    interval.getLastRunMillis(),
                     interval.getData());
         }
         else
@@ -312,7 +312,7 @@ public class IntervalSource
                     interval.getIntervalType(),
                     interval.isActive(),
                     interval.isStrictAlarm(),
-                    interval.getLastRun(),
+                    interval.getLastRunMillis(),
                     interval.getData());
         }
     }

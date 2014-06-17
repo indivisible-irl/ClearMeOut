@@ -52,6 +52,7 @@ public class SaveCancelFragment
                              ViewGroup container,
                              Bundle savedInstanceState)
     {
+        container.removeAllViews();
         View view = inflater.inflate(R.layout.frag_savecancel, container);
         btnSave = (Button) view.findViewById(R.id.savecancel_btn_save);
         btnCancel = (Button) view.findViewById(R.id.savecancel_btn_cancel);
@@ -90,6 +91,17 @@ public class SaveCancelFragment
     public void setSaveEnabled(boolean isEnabled)
     {
         btnSave.setEnabled(isEnabled);
+    }
+
+    public void setCancelEnabled(boolean isEnabled)
+    {
+        btnCancel.setEnabled(isEnabled);
+    }
+
+    public void setBothEnabled(boolean isEnabled)
+    {
+        setSaveEnabled(isEnabled);
+        setCancelEnabled(isEnabled);
     }
 
 

@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/generic_breadcrumbs"
+        android:id="@+id/profile_details_breadcrumbs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
-    <fragment
-        android:id="@+id/profile_listview"
-        android:name="com.indivisible.clearmeout.fragment.ProfileListFragment"
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:layout="@layout/frag_profile_list"/>
+        android:layout_weight="1">-->
 
-    <!-- To be used for confirming deletes etc -->
     <FrameLayout
-        android:id="@+id/generic_bottom_frame"
+        android:id="@+id/profile_details_preferenceFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!--</ScrollView>-->
+
+
+    <FrameLayout
+        android:id="@+id/profile_details_savecancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

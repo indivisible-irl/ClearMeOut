@@ -13,9 +13,9 @@ public class Interval
     private long id;
     private long fk_profile;
     private IntervalType intervalType;
-    private boolean strictAlarm;
     private boolean active;
-    private long lastRun;
+    private boolean strictAlarm;
+    private long lastRunMillis;
     private String[] data;
 
     ///////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ public class Interval
         this.intervalType = intervalType;
         this.strictAlarm = isStrictAlarm;
         this.active = isActive;
-        this.lastRun = lastRunMillis;
+        this.lastRunMillis = lastRunMillis;
         this.data = data;
     }
 
@@ -100,14 +100,14 @@ public class Interval
         this.active = isActive;
     }
 
-    public long getLastRun()
+    public long getLastRunMillis()
     {
-        return lastRun;
+        return lastRunMillis;
     }
 
-    public void setLastRun(long lastRunMillis)
+    public void setLastRunMillis(long lastRunMillis)
     {
-        this.lastRun = lastRunMillis;
+        this.lastRunMillis = lastRunMillis;
     }
 
     public String[] getData()
@@ -133,7 +133,7 @@ public class Interval
 
     public String debugContent()
     {
-        return "p_" + fk_profile + " / s_" + strictAlarm + " / a_" + active + "\nr_" + lastRun
+        return "p_" + fk_profile + " / s_" + strictAlarm + " / a_" + active + "\nr_" + lastRunMillis
                 + " / d_" + data.length;
     }
 }

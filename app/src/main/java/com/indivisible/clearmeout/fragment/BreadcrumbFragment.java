@@ -1,7 +1,5 @@
 package com.indivisible.clearmeout.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.indivisible.clearmeout.R;
+import com.indivisible.clearmeout.util.Utils;
 
 /**
  * Created by indiv on 16/06/14.
@@ -22,13 +21,11 @@ public class BreadcrumbFragment
     ////    data
     ///////////////////////////////////////////////////////
 
-    private List<String> trailParts;
-
+    private String[] trailParts;
     private TextView textViewTrail;
 
-    private static final String START = "|> ";
     private static final String SEP = " > ";
-    private static final String KEY_TRAIL_ARRAY = "breadcrumb_trail_array";
+    public static final String KEY_CRUMB_ARRAY = "breadcrumb_trail_array";
     private static final String TAG = "bCrumbFrag";
 
 
@@ -36,17 +33,28 @@ public class BreadcrumbFragment
     ////    init
     ///////////////////////////////////////////////////////
 
-    public static final BreadcrumbFragment newInstance(String[] trailArray)
+    public static final BreadcrumbFragment newInstance(String singleCrumb)
     {
-        Log.v(TAG, "newInstance...");
+        return newInstance(new String[] {
+            singleCrumb
+        });
+    }
+
+    public static final BreadcrumbFragment newInstance(String[] parentCrumbs, String newCrumb)
+    {
+        String[] newCrumbs = Utils.appendToArray(parentCrumbs, newCrumb);
+        return newInstance(newCrumbs);
+    }
+
+    public static final BreadcrumbFragment newInstance(String[] crumbArray)
+    {
         BreadcrumbFragment frag = new BreadcrumbFragment();
-        if (trailArray != null)
+        if (crumbArray != null)
         {
             Bundle args = new Bundle();
-            args.putStringArray(KEY_TRAIL_ARRAY, trailArray);
+            args.putStringArray(KEY_CRUMB_ARRAY, crumbArray);
             frag.setArguments(args);
         }
-        Log.v(TAG, "...returning instance");
         return frag;
     }
 
@@ -54,22 +62,20 @@ public class BreadcrumbFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Log.v(TAG, "onCreate (after super)...");
-        trailParts = new ArrayList<String>();
         Bundle args = getArguments();
-        Log.v(TAG, "...parsing args...");
         if (args != null)
         {
-            String[] trailArray = args.getStringArray(KEY_TRAIL_ARRAY);
+            String[] trailArray = args.getStringArray(KEY_CRUMB_ARRAY);
             if (trailArray != null)
             {
-                for (String crumb : trailArray)
-                {
-                    trailParts.add(crumb);
-                }
+                trailParts = trailArray;
             }
         }
-        Log.v(TAG, "...args parsed, end of onCreate");
+        if (trailParts == null)
+        {
+            Log.e(TAG, "Failed to extract array from bundle args");
+            trailParts = new String[0];
+        }
     }
 
     @Override
@@ -77,11 +83,9 @@ public class BreadcrumbFragment
                              ViewGroup container,
                              Bundle savedInstanceState)
     {
-        Log.v(TAG, "creating view...");
         View view = inflater.inflate(R.layout.frag_breadcrumbs, container, false);
         textViewTrail = (TextView) view.findViewById(R.id.bcrumb_text_trail);
         setTrailText();
-        Log.v(TAG, "...returning view");
         return view;
     }
 
@@ -90,32 +94,32 @@ public class BreadcrumbFragment
     ////    communication
     ///////////////////////////////////////////////////////
 
-    public boolean goUp()
-    {
-        int size = trailParts.size();
-        if (size < 1)
-        {
-            Log.e(TAG, "(goUp) Can't. Not enough crumbs: " + size);
-            return false;
-        }
-        else
-        {
-            trailParts.remove(trailParts.size() - 1);
-            setTrailText();
-            return true;
-        }
-    }
-
-    public void next(String nextLevelTitle)
-    {
-        trailParts.add(nextLevelTitle);
-        setTrailText();
-    }
-
-    public int size()
-    {
-        return trailParts.size();
-    }
+    //    public boolean goUp()
+    //    {
+    //        int size = trailParts.size();
+    //        if (size < 1)
+    //        {
+    //            Log.e(TAG, "(goUp) Can't. Not enough crumbs: " + size);
+    //            return false;
+    //        }
+    //        else
+    //        {
+    //            trailParts.remove(trailParts.size() - 1);
+    //            setTrailText();
+    //            return true;
+    //        }
+    //    }
+    //
+    //    public void next(String nextLevelTitle)
+    //    {
+    //        trailParts.add(nextLevelTitle);
+    //        setTrailText();
+    //    }
+    //
+    //    public int size()
+    //    {
+    //        return trailParts.size();
+    //    }
 
 
     ///////////////////////////////////////////////////////
@@ -124,21 +128,19 @@ public class BreadcrumbFragment
 
     public void setTrailText()
     {
-        Log.v(TAG, "setting text...");
-        if (trailParts.isEmpty())
+        if (trailParts.length < 1)
         {
             Log.e(TAG, "(setText) No trailParts to use");
             textViewTrail.setText("No trail...");
         }
         else
         {
-            StringBuilder sb = new StringBuilder(trailParts.get(0));
-            for (int i = 1; i < trailParts.size(); i++)
+            StringBuilder sb = new StringBuilder(trailParts[0]);
+            for (int i = 1; i < trailParts.length; i++)
             {
-                sb.append(SEP).append(trailParts.get(i));
+                sb.append(SEP).append(trailParts[i]);
             }
             textViewTrail.setText(sb.toString());
         }
-        Log.v(TAG, "...text set");
     }
 }
