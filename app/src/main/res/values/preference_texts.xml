@@ -11,8 +11,8 @@
     <!-- titles -->
     <string name="title_generic_isActive">Active?</string>
 
-    <string name="title_profile_name">Profile: %s</string>
-    <string name="title_profile_nextRun">Next scheduled run</string>
+    <string name="title_profile_name">Profile: %1$s</string>
+    <string name="title_profile_nextRun">Next scheduled Clear:</string>
 
     <string name="title_target_rootDir">Target directory</string>
     <string name="title_target_isRecursive">Recursive Clear?</string>
@@ -26,7 +26,8 @@
     <string name="summary_profile_name">Click to modify name</string>
     <string name="summanyOn_profile_isActive">Profile is enabled</string>
     <string name="summaryOff_profile_isActive">Profile is disabled</string>
-    <string name="summary_profile_nextRun">Will occur in: %s</string>
+    <string name="summary_profile_nextRun">will occur in: %1$s</string>
+    <string name="summary_profile_nextRun_none">None set</string>
 
     <string name="summary_target_rootDir">Dir: %1$s</string>
     <string name="summaryOn_target_isRecursive">Will Clear sub-directories too</string>
@@ -34,9 +35,13 @@
     <string name="summaryOn_target_doDeleteDirs">Will delete empty sub-directories on Clear</string>
     <string name="summaryOff_target_doDeleteDirs">Will only Clear files, directories untouched</string>
 
-    <string name="summary_intent_filters">%d of Y Filters active</string>
-    <string name="summary_intent_intervals">%d of Y Intervals active</string>
+    <string name="summary_intent_filters">%1$d of %2$d Filters active</string>
+    <string name="summary_intent_intervals">%1$d of %2$d Intervals active</string>
 
     <!-- TODO: Filter and Interval pref texts -->
+
+
+    <!-- Dialogues -->
+    <string name="dialog_profile_name_title">Choose a Profile name:</string>
 
 </resources>

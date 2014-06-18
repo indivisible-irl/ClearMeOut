@@ -26,7 +26,8 @@ public class ProfileDetailsFragment
 
     private ProfileManager profileManager;
     private long profileId;
-    private Profile profile;
+    private Profile thisProfile;
+    private Context context;
 
     private EditTextPreference profileNamePref;
     private CheckBoxPreference profileIsActivePref;
@@ -51,6 +52,7 @@ public class ProfileDetailsFragment
     private static final String ARG_PROFILEID = "profile_id";
     private static final String TAG = "ProfileDetailsFrag";
 
+
     ///////////////////////////////////////////////////////
     ////    init
     ///////////////////////////////////////////////////////
@@ -68,6 +70,7 @@ public class ProfileDetailsFragment
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
+        context = activity;
         verifyParentActivityInterface(activity);
     }
 
@@ -104,38 +107,25 @@ public class ProfileDetailsFragment
     {
         super.onActivityCreated(savedInstanceState);
         profileManager = new ProfileManager(getActivity());
-        profile = profileManager.getProfile(profileId);
+        thisProfile = profileManager.getProfile(profileId);
 
-        //Context context = getActivity();
-        //initKeys(context);
-        //initPrefs();
-        //populatePrefs();
-    }
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        //TODO: load temp state
-    }
-
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        //TODO: save temp state
+        initStrings();
+        initPrefs();
+        populatePrefs();
+        setPrefsActiveOrInactive();
     }
 
     @Override
     public void onDetach()
     {
         super.onDetach();
+        context = null;
         onIntentClickListener = null;
-        profile = null;
+        thisProfile = null;
         profileManager = null;
     }
 
-    private void initKeys(Context context)
+    private void initStrings()
     {
         profileNameKey = context.getString(R.string.key_profile_name);
         profileIsActiveKey = context.getString(R.string.key_profile_isActive);
@@ -159,12 +149,6 @@ public class ProfileDetailsFragment
         intervalsIntentPref = findPreference(intervalsIntentKey);
     }
 
-    private void populatePrefs()
-    {
-        profileNamePref.setTitle(profile.getName());
-        profileIsActivePref.setChecked(profile.isActive());
-    }
-
     private void verifyParentActivityInterface(Activity activity)
     {
         try
@@ -174,10 +158,74 @@ public class ProfileDetailsFragment
         catch (ClassCastException e)
         {
             Log.e(TAG, "Parent Activity must implement 'OnIntentClickListener'");
-            e.printStackTrace();
             throw e;
         }
     }
+
+
+    ///////////////////////////////////////////////////////
+    ////    handle prefs
+    ///////////////////////////////////////////////////////
+
+    private void populatePrefs()
+    {
+        profileNamePref.setTitle(context.getString(R.string.title_profile_name,
+                thisProfile.getName()));
+        profileNamePref.setDialogTitle(context.getString(R.string.dialog_profile_name_title));
+        targetDirPref.setSummary(context.getString(R.string.summary_target_rootDir,
+                thisProfile.getTarget().getRootDirectory()));
+        profileIsActivePref.setChecked(thisProfile.isActive());
+        //TODO: calculate next interval trigger time
+        profileNextRunPref.setSummary(context.getString(R.string.summary_profile_nextRun,
+                "1d 2h 3m"));
+        profileNextRunPref.setEnabled(false);
+        profileNextRunPref.setSelectable(false);
+        targetIsRecursivePref.setChecked(thisProfile.getTarget().isRecursive());
+        targetDoDeleteDirsPref.setChecked(thisProfile.getTarget().doDeleteDirectories());
+        filtersIntentPref.setSummary(context.getString(R.string.summary_intent_filters,
+                -1,
+                thisProfile.getFilters().size()));
+        intervalsIntentPref.setSummary(context.getString(R.string.summary_intent_intervals,
+                -1,
+                thisProfile.getIntervals().size()));
+    }
+
+    private void setPrefsActiveOrInactive()
+    {
+        if (thisProfile.getTarget().isRecursive())
+        {
+            targetDoDeleteDirsPref.setEnabled(true);
+        }
+        else
+        {
+            targetDoDeleteDirsPref.setEnabled(false);
+        }
+    }
+
+
+    ///////////////////////////////////////////////////////
+    ////    save and restore instance
+    ///////////////////////////////////////////////////////
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        //TODO: load temp state
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        //TODO: save temp state
+    }
+
+    private void syncProfile(Profile profile)
+    {
+
+    }
+
 
     ///////////////////////////////////////////////////////
     ////    communication
