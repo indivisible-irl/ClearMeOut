@@ -24,8 +24,8 @@ public class ProfileSource
     private DbOpenHelper dbHelper;
 
     private static final int INDEX_ID = 0;
-    private static final int INDEX_NAME = 1;
-    private static final int INDEX_ISACTIVE = 2;
+    private static final int INDEX_ISACTIVE = 1;
+    private static final int INDEX_NAME = 2;
 
     private static final String TAG = "ProfileSrc";
 
