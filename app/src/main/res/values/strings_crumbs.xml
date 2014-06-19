@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="crumb_profile_list">Home</string>
+    <string name="crumb_profile_details">Profile</string>
+    <string name="crumb_filter_list">Filters</string>
+    <string name="crumb_filter_details">Filter</string>
+    <string name="crumb_interval_list">Intervals</string>
+    <string name="crumb_interval_details">Interval</string>
+
+</resources>
