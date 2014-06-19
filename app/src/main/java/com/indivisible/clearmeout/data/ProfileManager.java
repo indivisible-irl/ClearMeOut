@@ -97,6 +97,63 @@ public class ProfileManager
 
 
     ///////////////////////////////////////////////////////
+    ////    count
+    ///////////////////////////////////////////////////////
+
+    public long[] getFiltersCount(long profileId)
+    {
+        if (profileId < 0)
+        {
+            Log.e(TAG, "(filtCounts) Invalid profileId: " + profileId);
+        }
+        else
+        {
+            try
+            {
+                filterSource.openReadable();
+                return filterSource.getProfileFilterCounts(profileId);
+            }
+            catch (SQLException e)
+            {
+                Log.e(TAG, "(filtCounts) Error reading Filter counts");
+                e.printStackTrace();
+            }
+            finally
+            {
+                filterSource.close();
+            }
+        }
+        return new long[2];
+    }
+
+    public long[] getIntervalsCount(long profileId)
+    {
+        if (profileId < 0)
+        {
+            Log.e(TAG, "(intCounts) Invalid profileId: " + profileId);
+        }
+        else
+        {
+            try
+            {
+                intervalSource.openReadable();
+                return intervalSource.getProfileIntervalCounts(profileId);
+            }
+            catch (SQLException e)
+            {
+                Log.e(TAG, "(intCounts) Error reading Filter counts");
+                e.printStackTrace();
+            }
+            finally
+            {
+                intervalSource.close();
+            }
+        }
+        return new long[2];
+    }
+
+
+    ///////////////////////////////////////////////////////
     ////    load
     ///////////////////////////////////////////////////////
 

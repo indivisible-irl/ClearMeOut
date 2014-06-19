@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.indivisible.clearmeout.database.DbOpenHelper;
@@ -176,6 +177,31 @@ public class IntervalSource
             }
         }
         return allProfileIntervals;
+    }
+
+    public long[] getProfileIntervalCounts(long parentProfileId)
+    {
+        long[] intervalCounts = new long[2];
+        intervalCounts[0] = getProfileIntervalCountTotal(parentProfileId);
+        intervalCounts[1] = getProfileIntervalCountActive(parentProfileId);
+        return intervalCounts;
+    }
+
+    public long getProfileIntervalCountTotal(long parentProfileId)
+    {
+        long count = DatabaseUtils.queryNumEntries(db,
+                DbOpenHelper.TABLE_INTERVALS,
+                DbOpenHelper.COLUMN_GENERIC_PARENTID + " = " + parentProfileId);
+        return count;
+    }
+
+    public long getProfileIntervalCountActive(long parentProfileId)
+    {
+        long count = DatabaseUtils.queryNumEntries(db,
+                DbOpenHelper.TABLE_INTERVALS,
+                DbOpenHelper.COLUMN_GENERIC_PARENTID + " = " + parentProfileId + " and "
+                        + DbOpenHelper.COLUMN_GENERIC_ISACTIVE + " = 1");
+        return count;
     }
 
     public boolean updateInterval(Interval interval)

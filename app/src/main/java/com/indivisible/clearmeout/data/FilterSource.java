@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.indivisible.clearmeout.database.DbOpenHelper;
@@ -161,6 +162,31 @@ public class FilterSource
             }
         }
         return allProfileFilters;
+    }
+
+    public long[] getProfileFilterCounts(long parentProfileId)
+    {
+        long[] profileCounts = new long[2];
+        profileCounts[0] = getProfileFilterCountTotal(parentProfileId);
+        profileCounts[1] = getProfileFilterCountActive(parentProfileId);
+        return profileCounts;
+    }
+
+    public long getProfileFilterCountTotal(long parentProfileId)
+    {
+        long count = DatabaseUtils.queryNumEntries(db,
+                DbOpenHelper.TABLE_FILTERS,
+                DbOpenHelper.COLUMN_GENERIC_PARENTID + " = " + parentProfileId);
+        return count;
+    }
+
+    public long getProfileFilterCountActive(long parentProfileId)
+    {
+        long count = DatabaseUtils.queryNumEntries(db,
+                DbOpenHelper.TABLE_FILTERS,
+                DbOpenHelper.COLUMN_GENERIC_PARENTID + " = " + parentProfileId + " and "
+                        + DbOpenHelper.COLUMN_GENERIC_ISACTIVE + " = 1");
+        return count;
     }
 
     public boolean updateFilter(Filter filter)
