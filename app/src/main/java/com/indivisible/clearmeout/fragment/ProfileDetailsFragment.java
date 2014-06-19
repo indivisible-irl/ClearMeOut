@@ -19,6 +19,7 @@ import com.indivisible.clearmeout.data.ProfileManager;
 
 public class ProfileDetailsFragment
         extends PreferenceFragment
+        implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener
 {
 
     ///////////////////////////////////////////////////////
@@ -184,6 +185,10 @@ public class ProfileDetailsFragment
         targetIsRecursivePref.setChecked(thisProfile.getTarget().isRecursive());
         targetDoDeleteDirsPref.setChecked(thisProfile.getTarget().doDeleteDirectories());
 
+        targetIsRecursivePref.setOnPreferenceChangeListener(this);
+        filtersIntentPref.setOnPreferenceClickListener(this);
+        intervalsIntentPref.setOnPreferenceClickListener(this);
+
         long[] filterCounts = profileManager.getFiltersCount(profileId);
         long[] intervalCounts = profileManager.getIntervalsCount(profileId);
         filtersIntentPref.setSummary(context.getString(R.string.summary_intent_filters,
@@ -203,6 +208,44 @@ public class ProfileDetailsFragment
         else
         {
             targetDoDeleteDirsPref.setEnabled(false);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference)
+    {
+        if (preference.getKey().equals(filtersIntentKey))
+        {
+            Log.v(TAG, "(click) filtersIntent clicked");
+            return true;
+        }
+        else if (preference.getKey().equals(intervalsIntentKey))
+        {
+            Log.v(TAG, "(click) intervalsIntent clicked");
+            return true;
+        }
+        else
+        {
+            Log.w(TAG, "(click) Unhandled click: " + preference.getKey());
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue)
+    {
+        if (preference.getKey().equals(targetIsRecursiveKey))
+        {
+            Log.v(TAG, "(change) isRecursive: " + newValue.toString());
+            boolean newIsRecursive = (Boolean) newValue;
+            targetDoDeleteDirsPref.setEnabled(newIsRecursive);
+            return true;
+        }
+        else
+        {
+            Log.w(TAG, "(change) Unhandled change: " + preference.getKey());
+            return false;
         }
     }
 

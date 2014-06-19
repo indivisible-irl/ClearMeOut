@@ -19,60 +19,56 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-
-        <!--  Broadcast Receivers  -->
-        <receiver
-            android:name="com.indivisible.clearmeout.receiver.OnBootReceiver">
+        <!-- Broadcast Receivers -->
+        <receiver android:name=".receiver.OnBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
-
-        <!--  Services  -->
+        <!-- Services -->
         <service
-            android:name="com.indivisible.clearmeout.service.DeleteService"
+            android:name=".service.DeleteService"
             android:exported="false">
         </service>
         <service
-            android:name="com.indivisible.clearmeout.service.UpdateAlarmsService"
+            android:name=".service.UpdateAlarmsService"
             android:exported="false">
         </service>
 
-
-        <!--  Activities  -->
+        <!-- Activities -->
         <activity
-            android:name="com.indivisible.clearmeout.activity.RootPreferencesActivity"
-            android:label="@string/app_name">
-
-        </activity>
-        <activity
-            android:name="com.indivisible.clearmeout.activity.StartActivity"
+            android:name=".activity.RootPreferencesActivity"
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name="com.indivisible.clearmeout.activity.MainPrefsActivity"
+            android:name=".activity.StartActivity"
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name="com.indivisible.clearmeout.activity.FiltersPreferenceActivity"
+            android:name=".activity.MainPrefsActivity"
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name="com.indivisible.clearmeout.activity.IntervalsPreferenceActivity"
+            android:name=".activity.FiltersPreferenceActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".activity.IntervalsPreferenceActivity"
             android:label="@string/app_name">
         </activity>
         <!-- New activities -->
         <activity
-            android:name="com.indivisible.clearmeout.activity.ProfileSelectionActivity"
+            android:name=".activity.ProfileSelectionActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name="com.indivisible.clearmeout.activity.ProfileDetailsActivity"
+            android:name=".activity.ProfileDetailsActivity"
             android:label="@string/app_name">
         </activity>
         <!-- File browsers -->
@@ -85,7 +81,10 @@
             android:label="@string/app_name"
             android:theme="@style/LightTheme">
         </activity>
-
+        <activity
+            android:name=".activity.ProfileChildActivity"
+            android:label="@string/app_name">
+        </activity>
     </application>
 
 </manifest>

@@ -41,6 +41,7 @@
             android:title="@string/title_target_isRecursive"
             android:summaryOn="@string/summaryOn_target_isRecursive"
             android:summaryOff="@string/summaryOff_target_isRecursive"
+            android:disableDependentsState="false"
             android:persistent="false"
             />
         <CheckBoxPreference
@@ -48,6 +49,7 @@
             android:title="@string/title_target_doDeleteDirs"
             android:summaryOn="@string/summaryOn_target_doDeleteDirs"
             android:summaryOff="@string/summaryOff_target_doDeleteDirs"
+            android:dependency="@string/key_target_isRecursive"
             android:persistent="false"
             />
 
