@@ -1,4 +1,4 @@
-package com.indivisible.clearmeout.data;
+package com.indivisible.clearmeout.database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,6 +8,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.indivisible.clearmeout.data.Profile;
 import com.indivisible.clearmeout.database.DbOpenHelper;
 
 /**

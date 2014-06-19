@@ -6,6 +6,11 @@ import java.util.List;
 import android.content.Context;
 import android.util.Log;
 
+import com.indivisible.clearmeout.database.FilterSource;
+import com.indivisible.clearmeout.database.IntervalSource;
+import com.indivisible.clearmeout.database.ProfileSource;
+import com.indivisible.clearmeout.database.TargetSource;
+
 /**
  * Created by indiv on 16/06/14.
  */
