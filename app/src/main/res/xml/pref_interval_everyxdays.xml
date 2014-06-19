@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceCategory 
+<PreferenceScreen>
+    <!--<PreferenceCategory
         android:title="@string/pref_interval_category_child_title">
-        
-        <EditTextPreference 
+
+        <EditTextPreference
             android:key="@string/pref_interval_everyXDays_days_key"
             android:title="@string/pref_interval_everyXDays_days_title"
             android:summary="@string/pref_interval_everyXDays_days_text"
@@ -15,6 +15,6 @@
             android:summary="@string/pref_interval_everyXDays_time_text"
             android:inputType="time"
             />
-        
-    </PreferenceCategory>
+
+    </PreferenceCategory>-->
 </PreferenceScreen>

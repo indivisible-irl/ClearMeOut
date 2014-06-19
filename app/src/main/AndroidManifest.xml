@@ -27,37 +27,16 @@
         </receiver>
 
         <!-- Services -->
-        <service
+        <!--<service
             android:name=".service.DeleteService"
             android:exported="false">
         </service>
         <service
             android:name=".service.UpdateAlarmsService"
             android:exported="false">
-        </service>
+        </service>-->
 
         <!-- Activities -->
-        <activity
-            android:name=".activity.RootPreferencesActivity"
-            android:label="@string/app_name">
-        </activity>
-        <activity
-            android:name=".activity.StartActivity"
-            android:label="@string/app_name">
-        </activity>
-        <activity
-            android:name=".activity.MainPrefsActivity"
-            android:label="@string/app_name">
-        </activity>
-        <activity
-            android:name=".activity.FiltersPreferenceActivity"
-            android:label="@string/app_name">
-        </activity>
-        <activity
-            android:name=".activity.IntervalsPreferenceActivity"
-            android:label="@string/app_name">
-        </activity>
-        <!-- New activities -->
         <activity
             android:name=".activity.ProfileSelectionActivity"
             android:label="@string/app_name">
@@ -80,10 +59,6 @@
             android:name="com.vassiliev.androidfilebrowser.FileBrowserActivity"
             android:label="@string/app_name"
             android:theme="@style/LightTheme">
-        </activity>
-        <activity
-            android:name=".activity.ProfileChildActivity"
-            android:label="@string/app_name">
         </activity>
     </application>
 

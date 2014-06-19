@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.indivisible.clearmeout.R;
 import com.indivisible.clearmeout.data.Profile;
 import com.indivisible.clearmeout.data.ProfileManager;
@@ -229,7 +230,6 @@ public class ProfileDetailsFragment
             Log.w(TAG, "(click) Unhandled click: " + preference.getKey());
             return false;
         }
-
     }
 
     @Override
