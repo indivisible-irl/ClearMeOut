@@ -8,6 +8,7 @@
             android:key="@string/key_profile_name"
             android:title="@string/title_profile_name"
             android:summary="@string/summary_profile_name"
+            android:dialogTitle="@string/dialog_profile_name_title"
             android:persistent="false"
             />
         <EditTextPreference

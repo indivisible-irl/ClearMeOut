@@ -3,6 +3,7 @@ package com.indivisible.clearmeout.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -111,8 +112,8 @@ public class ProfileDetailsFragment
 
         initStrings();
         initPrefs();
-        populatePrefs();
         setPrefsActiveOrInactive();
+        new PopulateTask().execute();
     }
 
     @Override
@@ -147,6 +148,9 @@ public class ProfileDetailsFragment
         targetDoDeleteDirsPref = (CheckBoxPreference) findPreference(targetDoDeleteDirsKey);
         filtersIntentPref = findPreference(filtersIntentKey);
         intervalsIntentPref = findPreference(intervalsIntentKey);
+
+        profileNextRunPref.setEnabled(false);
+        profileNextRunPref.setSelectable(false);
     }
 
     private void verifyParentActivityInterface(Activity activity)
@@ -171,23 +175,23 @@ public class ProfileDetailsFragment
     {
         profileNamePref.setTitle(context.getString(R.string.title_profile_name,
                 thisProfile.getName()));
-        profileNamePref.setDialogTitle(context.getString(R.string.dialog_profile_name_title));
         targetDirPref.setSummary(context.getString(R.string.summary_target_rootDir,
                 thisProfile.getTarget().getRootDirectory()));
         profileIsActivePref.setChecked(thisProfile.isActive());
         //TODO: calculate next interval trigger time
         profileNextRunPref.setSummary(context.getString(R.string.summary_profile_nextRun,
                 "1d 2h 3m"));
-        profileNextRunPref.setEnabled(false);
-        profileNextRunPref.setSelectable(false);
         targetIsRecursivePref.setChecked(thisProfile.getTarget().isRecursive());
         targetDoDeleteDirsPref.setChecked(thisProfile.getTarget().doDeleteDirectories());
+
+        long[] filterCounts = profileManager.getFiltersCount(profileId);
+        long[] intervalCounts = profileManager.getIntervalsCount(profileId);
         filtersIntentPref.setSummary(context.getString(R.string.summary_intent_filters,
-                -1,
-                thisProfile.getFilters().size()));
+                filterCounts[1],
+                filterCounts[0]));
         intervalsIntentPref.setSummary(context.getString(R.string.summary_intent_intervals,
-                -1,
-                thisProfile.getIntervals().size()));
+                intervalCounts[1],
+                intervalCounts[0]));
     }
 
     private void setPrefsActiveOrInactive()
@@ -237,4 +241,20 @@ public class ProfileDetailsFragment
         public void onChildClick(Intent intent);
     }
 
+
+    ///////////////////////////////////////////////////////
+    ////    async pref populate
+    ///////////////////////////////////////////////////////
+
+    private class PopulateTask
+            extends AsyncTask<Void, Void, Void>
+    {
+
+        @Override
+        protected Void doInBackground(Void... voidVar)
+        {
+            populatePrefs();
+            return null;
+        }
+    }
 }
